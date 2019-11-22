@@ -123,6 +123,33 @@ aeds1_tp3/fast:
 	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/build
 .PHONY : aeds1_tp3/fast
 
+Palavra.o: Palavra.c.o
+
+.PHONY : Palavra.o
+
+# target to build an object file
+Palavra.c.o:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Palavra.c.o
+.PHONY : Palavra.c.o
+
+Palavra.i: Palavra.c.i
+
+.PHONY : Palavra.i
+
+# target to preprocess a source file
+Palavra.c.i:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Palavra.c.i
+.PHONY : Palavra.c.i
+
+Palavra.s: Palavra.c.s
+
+.PHONY : Palavra.s
+
+# target to generate assembly for a file
+Palavra.c.s:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Palavra.c.s
+.PHONY : Palavra.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... aeds1_tp3"
 	@echo "... edit_cache"
+	@echo "... Palavra.o"
+	@echo "... Palavra.i"
+	@echo "... Palavra.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

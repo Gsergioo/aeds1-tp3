@@ -123,6 +123,33 @@ aeds1_tp3/fast:
 	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/build
 .PHONY : aeds1_tp3/fast
 
+Biblioteca.o: Biblioteca.c.o
+
+.PHONY : Biblioteca.o
+
+# target to build an object file
+Biblioteca.c.o:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o
+.PHONY : Biblioteca.c.o
+
+Biblioteca.i: Biblioteca.c.i
+
+.PHONY : Biblioteca.i
+
+# target to preprocess a source file
+Biblioteca.c.i:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Biblioteca.c.i
+.PHONY : Biblioteca.c.i
+
+Biblioteca.s: Biblioteca.c.s
+
+.PHONY : Biblioteca.s
+
+# target to generate assembly for a file
+Biblioteca.c.s:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Biblioteca.c.s
+.PHONY : Biblioteca.c.s
+
 Palavra.o: Palavra.c.o
 
 .PHONY : Palavra.o
@@ -149,6 +176,33 @@ Palavra.s: Palavra.c.s
 Palavra.c.s:
 	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Palavra.c.s
 .PHONY : Palavra.c.s
+
+Texto.o: Texto.c.o
+
+.PHONY : Texto.o
+
+# target to build an object file
+Texto.c.o:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Texto.c.o
+.PHONY : Texto.c.o
+
+Texto.i: Texto.c.i
+
+.PHONY : Texto.i
+
+# target to preprocess a source file
+Texto.c.i:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Texto.c.i
+.PHONY : Texto.c.i
+
+Texto.s: Texto.c.s
+
+.PHONY : Texto.s
+
+# target to generate assembly for a file
+Texto.c.s:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Texto.c.s
+.PHONY : Texto.c.s
 
 main.o: main.c.o
 
@@ -186,9 +240,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... aeds1_tp3"
 	@echo "... edit_cache"
+	@echo "... Biblioteca.o"
+	@echo "... Biblioteca.i"
+	@echo "... Biblioteca.s"
 	@echo "... Palavra.o"
 	@echo "... Palavra.i"
 	@echo "... Palavra.s"
+	@echo "... Texto.o"
+	@echo "... Texto.i"
+	@echo "... Texto.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

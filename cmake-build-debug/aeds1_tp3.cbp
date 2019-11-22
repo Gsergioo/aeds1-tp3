@@ -78,7 +78,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.c">
+			<Option target="aeds1_tp3"/>
+		</Unit>
+		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.h">
+			<Option target="aeds1_tp3"/>
+		</Unit>
 		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.c">
+			<Option target="aeds1_tp3"/>
+		</Unit>
+		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.h">
+			<Option target="aeds1_tp3"/>
+		</Unit>
+		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.c">
+			<Option target="aeds1_tp3"/>
+		</Unit>
+		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.h">
 			<Option target="aeds1_tp3"/>
 		</Unit>
 		<Unit filename="/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/main.c">

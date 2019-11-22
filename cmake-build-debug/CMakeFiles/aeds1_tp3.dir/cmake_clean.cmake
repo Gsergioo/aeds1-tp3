@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/aeds1_tp3.dir/main.c.o"
   "CMakeFiles/aeds1_tp3.dir/Palavra.c.o"
+  "CMakeFiles/aeds1_tp3.dir/Texto.c.o"
+  "CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o"
   "aeds1_tp3.pdb"
   "aeds1_tp3"
 )

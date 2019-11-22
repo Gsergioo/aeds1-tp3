@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/aeds1_tp3.dir/main.c.o CMakeFiles/aeds1_tp3.dir/Palavra.c.o  -o aeds1_tp3 
+/usr/bin/cc -g   CMakeFiles/aeds1_tp3.dir/main.c.o CMakeFiles/aeds1_tp3.dir/Palavra.c.o CMakeFiles/aeds1_tp3.dir/Texto.c.o CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o  -o aeds1_tp3 

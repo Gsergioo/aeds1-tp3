@@ -3,4 +3,4 @@ project(aeds1_tp3 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(aeds1_tp3 main.c Palavra.c)
+add_executable(aeds1_tp3 main.c Palavra.c Palavra.h Texto.c Texto.h Biblioteca.c Biblioteca.h)

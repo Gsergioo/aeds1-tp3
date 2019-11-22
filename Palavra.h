@@ -4,16 +4,18 @@
 
 //T-Item -----------
 typedef struct {
-    char letra;
+    char *letra;
+    char primLetra;
 }TPalavra;
 
 //Lista Encadeada
 typedef struct CelulaP{
     struct CelulaP *pProx;
-    TPalavra letra;
+    TPalavra palavra;
 }TCelulaP;
 
 typedef struct {
+    int tam;
     TCelulaP *pPrimeiro;
     TCelulaP *pUltimo;
 }TListaPLe;
@@ -26,15 +28,15 @@ typedef struct {
 }TListaPArr;
 
 //Operacoes por Arranjo
-void inicializaPArr(TPalavra *palavra, TListaPArr *lista);
-void insereLetraArr(TPalavra *palavra, TListaPArr *lista);
-void removeLetraArr(TPalavra *palavra, TListaPArr *lista);
-void imprimePalavraArr(TPalavra palavra, TListaPArr *lista);
-int tamanhoPalavraArr(TPalavra palavra, TListaPArr *lista);
+void inicializaPArr(TListaPArr *lista);
+void insereLetraArr(char letra, TListaPArr *lista, int i);
+int removeLetraArr(TListaPArr *lista, int pos);
+void imprimePalavraArr(TListaPArr *lista);
+int tamanhoPalavraArr(TListaPArr *lista);
 
 //Operacoes por Lista Encadeada
-void inicializaPLe(TPalavra *palavra, TCelulaP *celula);
-void insereLetraLe(TPalavra *palavra, TCelulaP *celula);
+void inicializaPLe(TCelulaP *celula, TListaPLe *lista);
+void insereLetraLe(TCelulaP *celula, TListaPLe *lista, char letra);
 void removeLetraLe(TPalavra *palavra, TCelulaP *celula);
-void imprimePalavraLe(TPalavra palavra, TCelulaP *celula);
-int tamanhoPalavraLe(TPalavra palavra, TCelulaP *celula);
+void imprimePalavraLe(TListaPLe *lista);
+int tamanhoPalavraLe(TListaPLe *lista);

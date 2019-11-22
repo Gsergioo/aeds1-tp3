@@ -150,6 +150,33 @@ Biblioteca.c.s:
 	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Biblioteca.c.s
 .PHONY : Biblioteca.c.s
 
+Interface.o: Interface.c.o
+
+.PHONY : Interface.o
+
+# target to build an object file
+Interface.c.o:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Interface.c.o
+.PHONY : Interface.c.o
+
+Interface.i: Interface.c.i
+
+.PHONY : Interface.i
+
+# target to preprocess a source file
+Interface.c.i:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Interface.c.i
+.PHONY : Interface.c.i
+
+Interface.s: Interface.c.s
+
+.PHONY : Interface.s
+
+# target to generate assembly for a file
+Interface.c.s:
+	$(MAKE) -f CMakeFiles/aeds1_tp3.dir/build.make CMakeFiles/aeds1_tp3.dir/Interface.c.s
+.PHONY : Interface.c.s
+
 Palavra.o: Palavra.c.o
 
 .PHONY : Palavra.o
@@ -243,6 +270,9 @@ help:
 	@echo "... Biblioteca.o"
 	@echo "... Biblioteca.i"
 	@echo "... Biblioteca.s"
+	@echo "... Interface.o"
+	@echo "... Interface.i"
+	@echo "... Interface.s"
 	@echo "... Palavra.o"
 	@echo "... Palavra.i"
 	@echo "... Palavra.s"

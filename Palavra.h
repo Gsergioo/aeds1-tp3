@@ -8,17 +8,17 @@ typedef struct {
 }Tletra;  //O item é uma letra que contem uma letra, não faz muito sentido.
 
 //Lista Encadeada
-typedef struct CelulaP{
-    struct CelulaP *pProx;
+typedef struct CelulaL{ //celula contendo uma letra
+    struct CelulaL *pProx;
     Tletra letra;
-}TCelulaP;
+}TCelulaL;
 
 typedef struct {
     int tam;
     char primeiraletra;
-    TCelulaP *pPrimeiro;
-    TCelulaP *pUltimo;
-}TListaPLe;
+    TCelulaL *pPrimeiro;
+    TCelulaL *pUltimo;
+}TListaLLe;
 
 //Arranjo
 typedef struct {
@@ -26,18 +26,18 @@ typedef struct {
     char primeiraletra;
     int primeiro;
     int ultimo;
-}TListaPArr;
+}TListaLArr;
 
 //Operacoes por Arranjo
-void inicializaPArr(TListaPArr *lista);
-void insereLetraArr(Tletra letra, TListaPArr *lista);
-int removeLetraArr(TListaPArr *lista, int pos);
-void imprimePalavraArr(TListaPArr *lista);
-int tamanhoPalavraArr(TListaPArr *lista);
+void inicializaPArr(TListaLArr *lista);
+void insereLetraArr(Tletra letra, TListaLArr *lista);
+int removeLetraArr(TListaLArr *lista, int pos);
+void imprimePalavraArr(TListaLArr *lista);
+int tamanhoPalavraArr(TListaLArr *lista);
 
 //Operacoes por Lista Encadeada
-void inicializaPLe(TListaPLe *lista);
-void insereLetraLe(TListaPLe *lista, Tletra letra);
-void removeLetraLe(Tletra *letra, TCelulaP *celula);
-void imprimePalavraLe(TListaPLe *lista);
-int tamanhoPalavraLe(TListaPLe *lista);
+void inicializaPLe(TListaLLe *lista);
+void insereLetraLe(TListaLLe *lista, Tletra letra);
+void removeLetraLe(Tletra *letra, TCelulaL *celula);
+void imprimePalavraLe(TListaLLe *lista);
+int tamanhoPalavraLe(TListaLLe *lista);

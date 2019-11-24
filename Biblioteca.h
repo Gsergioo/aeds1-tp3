@@ -5,7 +5,7 @@
 #include "Texto.h"
 //T-Item
 typedef struct {
-    TTexto *texto;
+    TPalavra *texto;
 }TBiblioteca;
 
 //Lista encadeada

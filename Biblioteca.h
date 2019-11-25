@@ -3,37 +3,39 @@
 //
 
 #include "Texto.h"
-//T-Item
+//T-Item num tem mais kkkjjjjj
+/*
 typedef struct {
     TPalavra *texto;
 }TBiblioteca;
-
+*/
 //Lista encadeada
 typedef struct CelulaB{
     struct CelulaB *pProx;
-    TBiblioteca biblioteca;
-}TCelulaB;
+    TListaPLe texto;
+}TCelulaT;
 
 typedef struct {
-    TCelulaB *pPrimeiro;
-    TCelulaB *pUltimo;
-}TListaBLe;
+    int tam;
+    TCelulaT *pPrimeiro;
+    TCelulaT *pUltimo;
+}TListaTLe;
 
 //Arranjo
 typedef struct {
-    TBiblioteca *biblioteca;
+    TListaPArr *biblioteca;
     int primeiro;
     int ultimo;
-}TListaBArr;
+}TListaTArr;
 
 //Operacoes por arranjo
-void inicializaArr(TBiblioteca *biblioteca, TListaBArr *lista);
-void insereTextoArr(TBiblioteca *biblioteca, TListaBArr *lista);
-void removeTextoArr(TBiblioteca *biblioteca, TListaBArr *lista);
-int tamanhoBibliotecaArr(TBiblioteca biblioteca, TListaBArr *lista);
+void inicializaArr(TListaTArr *lista);
+void insereTextoArr(TListaPArr *texto, TListaTArr *lista);
+void removeTextoArr(TListaPArr *texto, TListaTArr *lista);
+int tamanhoBibliotecaArr(TListaTArr *lista);
 
 //Operacoes por lista encadeada
-void inicializaLe(TBiblioteca *biblioteca, TListaBLe *lista);
-void insereTextoLe(TBiblioteca *biblioteca, TListaBLe *lista);
-void removeTextoLe(TBiblioteca *biblioteca, TListaBLe *lista);
-int tamanhoBibliotecaLe(TBiblioteca biblioteca, TListaBLe *lista);
+void inicializaLe(TListaTLe *lista);
+void insereTextoLe(TListaPLe *texto, TListaTLe *lista);
+void removeTextoLe(TListaPLe *texto, TListaTLe *lista);
+int tamanhoBibliotecaLe(TListaTLe *lista);

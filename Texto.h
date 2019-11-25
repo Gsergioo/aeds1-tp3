@@ -2,24 +2,23 @@
 // Created by lazarus on 21/11/19.
 //
 
-
 /*
-    TPalavra = Tipo palavra
     TCelulaP = Tipo Celula de Palavra (celula contem uma palavra)
-    TListaPLe = Tipo Lista de Palavras por Lista Encadeada
-    TListaPArr = Tipo Lista de Palavras por Arranjo
+    TListaPLe = Tipo Lista de Palavras por Lista Encadeada = texto por lista encadeada
+    TListaPArr = Tipo Lista de Palavras por Arranjo = texto por arranjo
  */
 
 #include "Palavra.h"
-//T-Item---------
+//T-Item--------- Num tem mais kkkkjjjj
+/*
 typedef struct {
     Tletra *palavra;
 }TPalavra;
-
+*/
 //Lista encadeada
 typedef struct CelulaP{ //celula contendo uma palavra
     struct CelulaP *pProx;
-    TPalavra texto;
+    TListaLLe palavra; //cada celula tem uma palavra pra um conjunto de celulas se tornar um texto
 }TCelulaP; //celula que vai armazenar palavra. Uma lista de palavras = texto
 
 typedef struct {
@@ -27,25 +26,25 @@ typedef struct {
     //chave da primeira letra de cada palavra;
     TCelulaP *pPrimeiro;
     TCelulaP *pUltimo;
-}TListaPLe; //Tipo Lista de Palavras por Lista Encadeada (TListaPLe)
+}TListaPLe; //Lista de celulas contendo palavras = texto por lista encadeada
 
 //Arranjo
 typedef struct {
-    TPalavra *texto;
+    TListaLArr *palavra;
     int primeiro;
     int ultimo;
 }TListaPArr; //Arranjo de Palavras = texto
 
 //Operacoes por arranjo
 void inicializaTextoArr(TListaPArr *lista);
-void inserePalavraArr(TPalavra *palavra, TListaPArr *lista);
-void removePalavraArr(TPalavra *palavra, TListaPArr *lista);
-void imprimeTextoArr(TListaLArr *letras,TListaPArr *listaPalavra);
+void inserePalavraArr(TListaLArr *palavra, TListaPArr *lista);
+void removePalavraArr(TListaLArr *palavra, TListaPArr *lista);
+void imprimeTextoArr(TListaPArr *listaPalavra);
 int tamanhoTextoArr(TListaPArr *lista);
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);
-void inserePalavraLe(TPalavra *texto, TListaPLe *lista);
-void removePalavraLe(TPalavra *texto, TListaPLe *lista);
-void imprimeTextoLe(TListaLLe *listaLLe, TListaPLe *lista);
-int tamanhoTextoLe(TPalavra texto, TListaPLe *lista);
+void inserePalavraLe(TListaLLe *texto, TListaPLe *lista);
+void removePalavraLe(TListaLLe *texto, TListaPLe *lista);
+void imprimeTextoLe(TListaPLe *lista);
+int tamanhoTextoLe(TListaPLe *lista);

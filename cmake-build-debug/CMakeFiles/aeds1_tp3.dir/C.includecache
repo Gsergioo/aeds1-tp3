@@ -11,6 +11,8 @@ Interface.h
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Interface.h
 stdio.h
 -
+stdlib.h
+-
 
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Interface.h
 bits/types/FILE.h

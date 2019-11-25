@@ -9,22 +9,21 @@
 //Operacoes por arranjo
 
 void inicializaTextoArr(TListaPArr *lista){
-    lista->texto = (TPalavra*) malloc(45*sizeof(TPalavra));
+    lista->palavra = (TListaLArr*) malloc(lista->ultimo*sizeof(TListaLArr));
     lista->primeiro = 0;
     lista->ultimo = 0;
 }
-void inserePalavraArr(TPalavra *texto, TListaPArr *lista){
-    lista->texto[lista->ultimo] = *texto;
+void inserePalavraArr(TListaLArr *palavra, TListaPArr *lista){
+    lista->palavra = palavra;
     lista->ultimo++;
 }
-void removePalavraArr(TPalavra *texto, TListaPArr *lista){
+void removePalavraArr(TListaLArr *palavra, TListaPArr *lista){
     //nao sei como vai ser a remoção
 }
-void imprimeTextoArr(TListaLArr *letras,TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
-    for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; ++i) {
-        imprimePalavraArr(letras);
+void imprimeTextoArr(TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
+    for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; i++) {
+        imprimePalavraArr(listaPalavra->palavra);
     }
-    printf("\n");
 }
 int tamanhoTextoArr(TListaPArr *lista){
     return lista->ultimo;
@@ -40,27 +39,27 @@ void inicializaTextoLe(TListaPLe *lista){
     lista->pPrimeiro->pProx = NULL;
     lista->tam = 0;
 }
-void inserePalavraLe(TPalavra *texto, TListaPLe *lista){
+void inserePalavraLe(TListaLLe *texto, TListaPLe *lista){
     TCelulaP *aux = NULL;
     aux = (TCelulaP*) malloc(sizeof(TCelulaP));
     aux->pProx = NULL;
-    aux->texto = *texto;
+    aux->palavra = *texto;
     lista->pUltimo->pProx = aux;
     lista->pUltimo = aux;
     lista->tam++;
 
 }
-void removePalavraLe(TPalavra *texto, TListaPLe *lista){
+void removePalavraLe(TListaLLe *texto, TListaPLe *lista){
     //nao sei como vai ser o criterio de remocao
 }
-void imprimeTextoLe(TListaLLe *listaLLe, TListaPLe *lista){
+void imprimeTextoLe(TListaPLe *lista){
     TCelulaP *aux = lista->pPrimeiro;
     while(aux->pProx != NULL){
-        imprimePalavraLe(listaLLe);
+        imprimePalavraLe(&aux->palavra);
         aux = aux->pProx;
     }
 }
-int tamanhoTextoLe(TPalavra texto, TListaPLe *lista){
+int tamanhoTextoLe(TListaPLe *lista){
     return lista->tam;
 }
 

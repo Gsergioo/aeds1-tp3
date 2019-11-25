@@ -13,17 +13,47 @@
 
 #include "Interface.h"
 #include <stdio.h>
+#include <stdlib.h>
+void leArquivo(FILE *arq){
+    printf("Lido");
+}
 void interface(){
-    printf(RED "----------------------------------\n" RESET);
-    printf(RED "|        " BLU "      MENU" RED      "              |\n" RESET);
-    printf(RED "|"RESET BLU"(1)"RESET " Opçao 1" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(2)"RESET " Opçao 2" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(3)"RESET " Opçao 3" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(4)"RESET " Opçao 4" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(5)"RESET " Opçao 5" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(6)"RESET " Opçao 6" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(7)"RESET " Opçao 7" RED"                     |\n" RESET);
-    printf(RED "|"RESET BLU"(8)"RESET " Opçao 8" RED"                     |\n" RESET);
-    printf(RED "----------------------------------\n" RESET);
+    FILE *arq = NULL;
+    int opcTad = 0;
+    int opcTam = 0;
+    int opcOrd = 0;
+    system("clear");
+    printf(RED "-----------------------------------\n" RESET);
+    printf(RED "|        " BLU"     |MENU|" RED             "              |\n" RESET);
+    printf(RED "|        " BLU"     ‾‾‾‾‾‾" RED             "              |\n" RESET);
+    printf(RED"|"RESET"  Escolha o TAD a ser utilizado"RED              "  |\n"RESET);
+    printf(RED "|"RESET BLU" (1)"RESET " TAD Palavra" RED"                 |\n" RESET);
+    printf(RED "|"RESET BLU" (2)"RESET " TAD Texto" RED"                   |\n" RESET);
+    printf(RED "|"RESET BLU" (3)"RESET " TAD Biblioteca" RED"              |\n" RESET);
+    printf(RED "-----------------------------------\n"                          RESET);
     printf(BLU "Opção: " RESET);
+    scanf("%d",&opcTad);
+    system("clear");
+
+
+    printf(RED "-----------------------------------\n" RESET);
+    printf(RED "|        " BLU"     |MENU|" RED      "              |\n" RESET);
+    printf(RED "|        " BLU"     ‾‾‾‾‾‾" RED      "              |\n" RESET);
+    printf(RED"|"RESET"  Escolha o tamanho da entrada"RED       "   |\n"RESET);
+    printf(RED "-----------------------------------\n" RESET);
+    printf(BLU "Tamanho: " RESET);
+    scanf("%d",&opcTam);
+    system("clear");
+
+
+    printf(RED "-----------------------------------\n" RESET);
+    printf(RED "|        " BLU"     |MENU|" RED             "              |\n" RESET);
+    printf(RED "|        " BLU"     ‾‾‾‾‾‾" RED             "              |\n" RESET);
+    printf(RED"|"RESET"       Escolha o algoritmo "RED              "      |\n"RESET);
+    printf(RED "|"RESET BLU" (1)"RESET " Inserção"RED "                    |\n" RESET);
+    printf(RED "|"RESET BLU" (2)"RESET " QuickSort" RED"                   |\n" RESET);
+    printf(RED "-----------------------------------\n"                          RESET);
+    printf(BLU "Opção: " RESET);
+    scanf("%d",&opcOrd);
+    system("clear");
 }

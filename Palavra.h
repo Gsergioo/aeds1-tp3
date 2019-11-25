@@ -26,7 +26,7 @@ typedef struct {
     char primeiraletra;
     int primeiro;
     int ultimo;
-}TListaLArr;
+}TListaLArr; //Palavra
 
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *lista);

@@ -5,4 +5,6 @@
 #include <bits/types/FILE.h>
 
 void interface();
-void leArquivo(FILE *arq);
+void printFuncPalavra();
+void printFuncTexto();
+void printFuncBiblio();

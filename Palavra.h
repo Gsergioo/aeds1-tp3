@@ -30,14 +30,14 @@ typedef struct {
 
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *lista);
-void insereLetraArr(Tletra letra, TListaLArr *lista);
+void insereLetraArr(TListaLArr *lista);
 int removeLetraArr(TListaLArr *lista, int pos);
 void imprimePalavraArr(TListaLArr *lista);
 int tamanhoPalavraArr(TListaLArr *lista);
 
 //Operacoes por Lista Encadeada
 void inicializaPLe(TListaLLe *lista);
-void insereLetraLe(TListaLLe *lista, Tletra letra);
+void insereLetraLe(TListaLLe *lista);
 void removeLetraLe(Tletra *letra, TCelulaL *celula);
 void imprimePalavraLe(TListaLLe *lista);
 int tamanhoPalavraLe(TListaLLe *lista);

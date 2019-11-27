@@ -12,13 +12,15 @@ void inicializaPArr(TListaLArr *palavra){
     palavra->ultimo = palavra->primeiro;
     palavra->letra = (Tletra*) malloc(45* sizeof(char));
 }
-void insereLetraArr(Tletra letra, TListaLArr *lista){
-    if(lista->ultimo < 45){
-        lista->letra[lista->ultimo] = letra;
+
+void insereLetraArr(TListaLArr *lista){ //Cria palavras aleatorias
+    int tam = rand()%44;
+    for(int i = 0; i < tam; i++){
+        lista->letra[i].letra = 'a' + rand()%26;
         lista->ultimo++;
     }
-    lista->primeiraletra = lista->letra[0].letra;
 }
+
 int removeLetraArr(TListaLArr *lista, int pos){
     if(pos <= lista->ultimo && pos >= lista->primeiro) {
         for (int i = pos + 1; i < lista->ultimo; i++) {
@@ -51,17 +53,21 @@ void inicializaPLe(TListaLLe *lista){
     lista->pUltimo->pProx = NULL;
     lista->tam = 0;
 }
-void insereLetraLe(TListaLLe *lista, Tletra letra){
+
+void insereLetraLe(TListaLLe *lista){ //Cria palavras aleatorias
     TCelulaL *aux;
-    aux = (TCelulaL*) malloc(sizeof(TCelulaL));
-    aux->pProx = NULL;
-    lista->pUltimo->pProx = aux;
-    lista->pUltimo = lista->pUltimo->pProx; //faz a ligação entre celulas
-    lista->pUltimo->letra = letra; //insere a letra
+    int tam = rand()%45;
+    for(int i = 0; i < tam; i++){
+        aux = (TCelulaL*) malloc(sizeof(TCelulaL));
+        aux->pProx = NULL;
+        lista->pUltimo->pProx = aux;
+        lista->pUltimo = lista->pUltimo->pProx; //faz a ligação entre celulas
+        lista->pUltimo->letra.letra = 'a' + rand()%26; //insere a letra
+    }
     lista->primeiraletra = lista->pPrimeiro->pProx->letra.letra ; //armazena a primeira letra
     lista->tam++;
-
 }
+
 void removeLetraLe(Tletra *letra, TCelulaL *celula){
     //nao sei se e pra remover uma letra inserida e procurar pela primeira ocorrencia
     //nao sei se e pra remover uma posicao especifica

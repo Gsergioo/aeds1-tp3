@@ -6,8 +6,10 @@ CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o: ../Biblioteca.h
 CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o: ../Palavra.h
 CMakeFiles/aeds1_tp3.dir/Biblioteca.c.o: ../Texto.h
 
+CMakeFiles/aeds1_tp3.dir/Interface.c.o: ../Biblioteca.h
 CMakeFiles/aeds1_tp3.dir/Interface.c.o: ../Interface.c
-CMakeFiles/aeds1_tp3.dir/Interface.c.o: ../Interface.h
+CMakeFiles/aeds1_tp3.dir/Interface.c.o: ../Palavra.h
+CMakeFiles/aeds1_tp3.dir/Interface.c.o: ../Texto.h
 
 CMakeFiles/aeds1_tp3.dir/Palavra.c.o: ../Palavra.c
 CMakeFiles/aeds1_tp3.dir/Palavra.c.o: ../Palavra.h

@@ -8,9 +8,9 @@
 
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *palavra){
+    palavra->letra = (Tletra*) malloc(45 * sizeof(Tletra));
     palavra->primeiro = 0;
     palavra->ultimo = palavra->primeiro;
-    palavra->letra = (Tletra*) malloc(45* sizeof(char));
 }
 
 void insereLetraArr(TListaLArr *lista){ //Cria palavras aleatorias

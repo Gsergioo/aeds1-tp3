@@ -6,5 +6,5 @@
 
 void interface();
 void printFuncPalavra();
-void printFuncTexto();
-void printFuncBiblio();
+void printFuncTexto(int *tamTexto);
+void printFuncBiblio(int *tamBiblio);

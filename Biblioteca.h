@@ -29,13 +29,13 @@ typedef struct {
 }TListaTArr;
 
 //Operacoes por arranjo
-void inicializaArr(TListaTArr *lista);
+void inicializaBiblioArr(TListaTArr *lista);
 void insereTextoArr(TListaPArr *texto, TListaTArr *lista);
 void removeTextoArr(TListaPArr *texto, TListaTArr *lista);
 int tamanhoBibliotecaArr(TListaTArr *lista);
 
 //Operacoes por lista encadeada
-void inicializaLe(TListaTLe *lista);
+void inicializaBiblioLe(TListaTLe *lista);
 void insereTextoLe(TListaPLe *texto, TListaTLe *lista);
 void removeTextoLe(TListaPLe *texto, TListaTLe *lista);
 int tamanhoBibliotecaLe(TListaTLe *lista);

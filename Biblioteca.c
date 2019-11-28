@@ -5,7 +5,7 @@
 #include "Biblioteca.h"
 #include <stdlib.h>
 //Operacoes por arranjo
-void inicializaArr(TListaTArr *lista){
+void inicializaBiblioArr(TListaTArr *lista){
     lista->biblioteca = (TListaPArr*) malloc(lista->biblioteca->ultimo * sizeof(TListaPArr));
     lista->primeiro = 0;
     lista->ultimo = lista->primeiro;
@@ -22,7 +22,7 @@ int tamanhoBibliotecaArr(TListaTArr *lista){
 }
 
 //Operacoes por lista encadeada
-void inicializaLe(TListaTLe *lista){
+void inicializaBiblioLe(TListaTLe *lista){
     lista->pPrimeiro = (TCelulaT*) malloc(sizeof(TCelulaT));
     lista->pPrimeiro->pProx = NULL;
     lista->pUltimo = lista->pPrimeiro;

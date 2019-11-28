@@ -1,6 +1,9 @@
 //
 // Created by lazarus on 21/11/19.
 //
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //T-Item -----------
 typedef struct {
@@ -9,8 +12,9 @@ typedef struct {
 
 //Lista Encadeada
 typedef struct CelulaL{ //celula contendo uma letra
-    struct CelulaL *pProx;
+    struct CelulaL *pProx, *pAnte; //duplamente encadeada
     Tletra letra;
+    int indice;
 }TCelulaL;
 
 typedef struct {
@@ -41,3 +45,7 @@ void insereLetraLe(TListaLLe *lista);
 void removeLetraLe(Tletra *letra, TCelulaL *celula);
 void imprimePalavraLe(TListaLLe *lista);
 int tamanhoPalavraLe(TListaLLe *lista);
+void quicksort(TListaLLe *lista);
+void ordena(TCelulaL*esq, TCelulaL*dir, TListaLLe *lista);
+void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista);
+void troca(TCelulaL* i, TCelulaL* j);

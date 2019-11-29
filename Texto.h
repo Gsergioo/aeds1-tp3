@@ -17,8 +17,9 @@ typedef struct {
 */
 //Lista encadeada
 typedef struct CelulaP{ //celula contendo uma palavra
-    struct CelulaP *pProx;
+    struct CelulaP *pProx, *pAnte;
     TListaLLe palavra; //cada celula tem uma palavra pra um conjunto de celulas se tornar um texto
+    int indice;
 }TCelulaP; //celula que vai armazenar palavra. Uma lista de palavras = texto
 
 typedef struct {
@@ -37,14 +38,18 @@ typedef struct {
 
 //Operacoes por arranjo
 void inicializaTextoArr(TListaPArr *lista);
-void inserePalavraArr(TListaLArr *palavra, TListaPArr *lista);
+void inserePalavraArr(TListaPArr *lista);
 void removePalavraArr(TListaLArr *palavra, TListaPArr *lista);
 void imprimeTextoArr(TListaPArr *listaPalavra);
 int tamanhoTextoArr(TListaPArr *lista);
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);
-void inserePalavraLe(TListaLLe *texto, TListaPLe *lista);
+void inserePalavraLe(TListaPLe *lista, int tam);
 void removePalavraLe(TListaLLe *texto, TListaPLe *lista);
 void imprimeTextoLe(TListaPLe *lista);
 int tamanhoTextoLe(TListaPLe *lista);
+void quicksortTexto(TListaPLe* texto);
+void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto);
+void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto);
+void trocaTexto(TCelulaP* i, TCelulaP* j);

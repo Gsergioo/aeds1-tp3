@@ -19,6 +19,12 @@ stdlib.h
 -
 
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
 
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.h
 Palavra.h

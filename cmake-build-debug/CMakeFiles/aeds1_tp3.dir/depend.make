@@ -18,6 +18,9 @@ CMakeFiles/aeds1_tp3.dir/Texto.c.o: ../Palavra.h
 CMakeFiles/aeds1_tp3.dir/Texto.c.o: ../Texto.c
 CMakeFiles/aeds1_tp3.dir/Texto.c.o: ../Texto.h
 
+CMakeFiles/aeds1_tp3.dir/main.c.o: ../Biblioteca.h
 CMakeFiles/aeds1_tp3.dir/main.c.o: ../Interface.h
+CMakeFiles/aeds1_tp3.dir/main.c.o: ../Palavra.h
+CMakeFiles/aeds1_tp3.dir/main.c.o: ../Texto.h
 CMakeFiles/aeds1_tp3.dir/main.c.o: ../main.c
 

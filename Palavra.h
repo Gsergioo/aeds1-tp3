@@ -35,17 +35,17 @@ typedef struct {
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *lista);
 void insereLetraArr(TListaLArr *lista);
-int removeLetraArr(TListaLArr *lista, int pos);
+void removeLetraArr(TListaLArr *lista);
 void imprimePalavraArr(TListaLArr *lista);
 int tamanhoPalavraArr(TListaLArr *lista);
 
 //Operacoes por Lista Encadeada
 void inicializaPLe(TListaLLe *lista);
 void insereLetraLe(TListaLLe *lista);
-void removeLetraLe(Tletra *letra, TCelulaL *celula);
+void removeLetraLe(TListaLLe *lista);
 void imprimePalavraLe(TListaLLe *lista);
 int tamanhoPalavraLe(TListaLLe *lista);
-void quicksort(TListaLLe *lista);
-void ordena(TCelulaL*esq, TCelulaL*dir, TListaLLe *lista);
+void quicksort(TListaLLe lista);
+void ordena(TCelulaL esq, TCelulaL dir, TListaLLe lista);
 void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista);
 void troca(TCelulaL* i, TCelulaL* j);

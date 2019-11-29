@@ -6,7 +6,7 @@
 
 void interface();
 void printFuncPalavra();
-void printFuncTexto(int *tamTexto);
-void printFuncBiblio(int *tamBiblio);
+void printFuncTexto();
+void printFuncBiblio();
 void inicializaListas(int opcED, int opcTad, TListaLLe *palaLe, TListaLArr *palaArr, TListaPLe *texLe, TListaPArr *texArr, TListaTLe *bibLe, TListaTArr *bibArr);
 void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *opcQtdPalavr, int *opcOrd);

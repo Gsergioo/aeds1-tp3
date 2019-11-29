@@ -1,7 +1,8 @@
 //
 // Created by lazarus on 21/11/19.
 //
-
+#define YEL   "\x1B[33m"
+#define RESET "\x1B[0m"
 #include "Palavra.h"
 
 
@@ -19,15 +20,12 @@ void insereLetraArr(TListaLArr *lista){
     }
 }
 
-int removeLetraArr(TListaLArr *lista, int pos){
-    if(pos <= lista->ultimo && pos >= lista->primeiro) {
-        for (int i = pos + 1; i < lista->ultimo; i++) {
-            lista->letra[i - 1] = lista->letra[i];
-        }
+void removeLetraArr(TListaLArr *lista){
+    if(lista->ultimo > 0){
+        printf(YEL"----> Letra removida! " RESET "%c", lista->letra[lista->ultimo].letra);
         lista->ultimo--;
-        return 1;
     } else
-        return 0;
+        printf(YEL"----> Não é possível remover!" RESET);
 }
 
 void imprimePalavraArr(TListaLArr *lista){
@@ -69,10 +67,16 @@ void insereLetraLe(TListaLLe *lista){
         lista->pUltimo->indice = lista->tam;
     }
 }
-void removeLetraLe(Tletra *letra, TCelulaL *celula){
-    //nao sei se e pra remover uma letra inserida e p+rocurar pela primeira ocorrencia
-    //nao sei se e pra remover uma posicao especifica
-    //nao sei se e pra remover a ultima/primeira letra
+void removeLetraLe(TListaLLe *lista){
+    TCelulaL *aux;
+    if(lista->tam > 0) {
+        aux = lista->pUltimo;
+        lista->pUltimo = lista->pUltimo->pAnte;
+        lista->pUltimo->pProx = NULL;
+        printf(YEL"----> Letra removida: " RESET "%c",aux->letra.letra);
+        free(aux);
+    } else
+        printf(YEL"----> Não é possível remover! "RESET);
 }
 void imprimePalavraLe(TListaLLe *lista){
     TCelulaL *aux;
@@ -87,20 +91,21 @@ int tamanhoPalavraLe(TListaLLe *lista){
     return lista->tam;
 }
 
-void ordena(TCelulaL* esq, TCelulaL* dir, TListaLLe *lista){
+// ---------------------------------- passar apenas a lista
+void ordena(TCelulaL esq, TCelulaL dir, TListaLLe lista){
     TCelulaL* i;
     TCelulaL* j;
-    particao(esq, dir, &i, &j, lista);
-    printf("indice i: %c ", i->letra);
-    printf("indice j : %c ", j->letra);
+    particao(&esq, &dir, &i, &j, &lista);
+    printf("indice i: %c ", i->letra.letra);
+    printf("indice j : %c ", j->letra.letra);
 
-    if(esq->indice < j->indice) ordena(esq, j, lista);
-    if(dir->indice > i->indice) ordena(i, dir, lista);
+    if(esq.indice < j->indice) ordena(esq, *j, lista);
+    if(dir.indice > i->indice) ordena(*i, dir, lista);
 }
 
 
-void quicksort(TListaLLe *lista){
-    ordena(lista->pPrimeiro->pProx, lista->pUltimo, lista);
+void quicksort(TListaLLe lista){
+    ordena(*lista.pPrimeiro->pProx, *lista.pUltimo, lista);
 }
 
 void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista){

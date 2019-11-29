@@ -32,19 +32,16 @@ void printFuncPalavra(){
 }
 
 
-void printFuncTexto(int *tamTexto){
-    printf(GRN"\n            TAD Texto!            \n"RESET);
-    printf(RED "-----------------------------------\n" RESET);
-    printf(BLU " Insira o tamanho dos textos: "RESET);
-    scanf("%d", tamTexto);
+void printFuncTexto(){
     printf(RED "-----------------------------------\n" RESET);
     printf(RED "|        " BLU"     |OPERAÇÕES|" RED              "         |\n" RESET);
     printf(RED "|        " BLU"     ‾‾‾‾‾‾‾‾‾‾‾" RED             "         |\n" RESET);
     printf(RED "|"RESET BLU" (1)"RESET " Inserir palavra" RED"             |\n" RESET);
     printf(RED "|"RESET BLU" (2)"RESET " Remover palavra" RED"             |\n" RESET);
     printf(RED "|"RESET BLU" (3)"RESET " Tamanho do texto" RED"            |\n" RESET);
-    printf(RED "|"RESET BLU" (4)"RESET " Ordena Texto" RED"                |\n" RESET);
-    printf(RED "|"RESET BLU" (5)"RESET " Sair" RED"                        |\n" RESET);
+    printf(RED "|"RESET BLU" (4)"RESET " Imprime texto" RED"               |\n" RESET);
+    printf(RED "|"RESET BLU" (5)"RESET " Ordena Texto" RED"                |\n" RESET);
+    printf(RED "|"RESET BLU" (6)"RESET " Sair" RED"                        |\n" RESET);
     printf(RED "-----------------------------------\n"                          RESET);
     printf(BLU "Opção: " RESET);
 
@@ -52,17 +49,14 @@ void printFuncTexto(int *tamTexto){
 }
 
 
-void printFuncBiblio(int *tamBiblio){
-    printf(GRN"\n          TAD Biblioteca!          \n"RESET);
-    printf(RED "-----------------------------------\n" RESET);
-    printf(BLU " Insira o tamanho da biblioteca: ");
-    scanf("%d", tamBiblio);
+void printFuncBiblio(){
     printf(RED "|        " BLU"     |OPERAÇÕES|" RED              "        |\n" RESET);
     printf(RED "|        " BLU"     ‾‾‾‾‾‾" RED             "              |\n" RESET);
     printf(RED "|"RESET BLU" (1)"RESET " Inserir texto" RED"               |\n" RESET);
     printf(RED "|"RESET BLU" (2)"RESET " Remover texto" RED"               |\n" RESET);
     printf(RED "|"RESET BLU" (3)"RESET " Tamanho da biblioteca" RED"       |\n" RESET);
-    printf(RED "|"RESET BLU" (4)"RESET " Sair" RED"                        |\n" RESET);
+    printf(RED "|"RESET BLU" (4)"RESET " Ordenar da biblioteca" RED"       |\n" RESET);
+    printf(RED "|"RESET BLU" (5)"RESET " Sair" RED"                        |\n" RESET);
     printf(RED "-----------------------------------\n"                          RESET);
     printf(BLU "Opção: " RESET);
 
@@ -267,28 +261,20 @@ void interface(){
                     scanf("%d", &opcOperacao);
                     if (opcOperacao == 1) { //inserir letra LE
                         insereLetraLe(&palavraLe);
-                        printf(YEL"----> LETRAS INSERIDAS"RESET);
+                        printf(YEL"----> Letras inseridas!"RESET);
                         system("clear");
                     } else if (opcOperacao == 2) { //remover letra LE
-                        int pos = 0;
-                        printf(YEL"----> Posicao a ser removida: "RESET);
-                        scanf("%d", &pos);
-                        if (pos <= palavraLe.tam && palavraLe.tam > 0) {
-                            system("clear");
-                            printf(YEL"----> Removidah!"RESET);
-                        }
-                        else
-                            printf(YEL"----> Nao é possivel remover!"RESET);
-                    } else if (opcOperacao == 3) {
+                        removeLetraLe(&palavraLe);
+                    } else if (opcOperacao == 3) { //imprimir
                         system("clear");
                         printf(YEL"----> Palavra: "RESET);
                         imprimePalavraLe(&palavraLe);
                         break;
-                    } else if(opcOperacao == 4){
+                    } else if(opcOperacao == 4){ //tamanho
                         system("clear");
                         printf(YEL"----> Tamanho da palavra: "RESET"%d\n", tamanhoPalavraLe(&palavraLe));
                         break;
-                    }else if(opcOperacao == 5){
+                    }else if(opcOperacao == 5){ //sair
                         system("clear");
                         configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
                         break;
@@ -299,19 +285,13 @@ void interface(){
                 } else if (opcED == 2) {//arranjo
                     printFuncPalavra();
                     scanf("%d", &opcOperacao);
-                    if (opcOperacao == 1) { //inserir letra LE
+                    if (opcOperacao == 1) { //inserir
                         insereLetraArr(&palavraArr);
-                        printf(YEL"----> LETRAS INSERIDAS"RESET);
+                        printf(YEL"----> Letras inseridas!"RESET);
                         system("clear");
-                    } else if (opcOperacao == 2) { //remover letra LE
-                        int pos = 0;
-                        printf(YEL"----> Posicao a ser removida: "RESET);
-                        scanf("%d", &pos);
-                        if (pos <= palavraArr.ultimo && palavraArr.ultimo > 0)
-                            printf(YEL"----> Removidah!"RESET);
-                            //removeLetraLe(&palavraLe, pos);
-                        else
-                            printf(YEL"----> Nao é possivel remover!"RESET);
+                    } else if (opcOperacao == 2) { //remover
+                       system("clear");
+                       removeLetraArr(&palavraArr);
                     } else if (opcOperacao == 3) {
                         system("clear");
                         printf(YEL"----> Palavra: "RESET);
@@ -333,46 +313,39 @@ void interface(){
                 }
                 case 2: {//tad texto
                     if(opcED == 1) { //lista encadeada
-                        printFuncTexto(&tamTexto);
+                        printFuncTexto();
                         scanf("%d", &opcOperacao);
                         if (opcOperacao == 1) {
                             system("clear");
-                            inserePalavraLe(&palavraLe, &textoLe);
+                            inserePalavraLe(&textoLe, opcQtdPalavr);
                             printf(YEL"----> Palavra inserida!\n"RESET);
                         } else if (opcOperacao == 2) {
                             system("clear");
-                            int pos = 0;
-                            printf(YEL"----> Posicao a ser removida: "RESET);
-                            scanf("%d", &pos);
-                            if(pos <= textoLe.tam && pos >= 0) {
-                                removePalavraLe(&palavraLe, &textoLe); //tem que mudar sa parada aq
-                                printf(YEL"----> Palavra removida!\n"RESET);
-                            }
+                            removePalavraLe(&textoLe);
                         } else if (opcOperacao == 3) {
                             system("clear");
                             printf(YEL"----> Tamanho do texto: "RESET"%d", tamanhoTextoLe(&textoLe));
                         }else if(opcOperacao == 4){
-                            printf(YEL"----> Ordenadah\n"RESET);
+                            system("clear");
+                            imprimeTextoLe(&textoLe);
+                            printf("\n");
                         } else if(opcOperacao == 5) {
+                            system("clear");
+                            quicksortTexto(textoLe);
+                        }else if(opcOperacao == 6) {
                             configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
                             break;
                         }
-                    }else if(opcED == 2){
-                        printFuncTexto(&tamTexto);
+                    }else if(opcED == 2){ //arranjo
+                        printFuncTexto();
                         scanf("%d", &opcOperacao);
                         if (opcOperacao == 1) {
                             system("clear");
-                            inserePalavraArr(&palavraArr);
+                            inserePalavraArr(&textoArr);
                             printf(YEL"----> Palavra inserida!\n"RESET);
                         } else if (opcOperacao == 2) {
                             system("clear");
-                            int pos = 0;
-                            printf(YEL"----> Posicao a ser removida: "RESET);
-                            scanf("%d", &pos);
-                            if(pos <= textoArr.ultimo && pos >= 0) {
-                                removePalavraArr(&palavraArr, &textoArr); //tem que mudar sa parada aq
-                                printf(YEL"----> Palavra removida!\n"RESET);
-                            }
+                            removePalavraArr(&textoArr);
                         } else if (opcOperacao == 3) {
                             system("clear");
                             printf(YEL"----> Tamanho do texto: "RESET"%d", tamanhoTextoArr(&textoArr));
@@ -385,21 +358,14 @@ void interface(){
                 }
                 case 3: {//tad biblioteca
                     if(opcED == 1){
-                        printFuncBiblio(&tamBibli);
+                        printFuncBiblio();
                         scanf("%d", &opcOperacao);
                         if (opcOperacao == 1) {
                             system("clear");
-                            insereTextoLe(&textoLe, &bibliLe);
+                            insereTextoLe(&bibliLe, opcQtdTextos, opcQtdPalavr);
                             printf(YEL"----> Texto inserido!\n"RESET);
                         } else if (opcOperacao == 2) {
-                            system("clear");
-                            int pos = 0;
-                            printf(YEL"----> Posicao a ser removida: "RESET);
-                            scanf("%d", &pos);
-                            if(pos <= bibliLe.tam && pos >= 0) {
-                                removeTextoLe(&textoLe, &bibliLe); //tem que mudar sa parada aq
-                                printf(YEL"----> Texto removido!\n"RESET);
-                            }
+                            removeTextoLe(&bibliLe);
                         } else if (opcOperacao == 3) {
                             system("clear");
                             printf(YEL"----> Tamanho da biblioteca: "RESET"%d\n", tamanhoBibliotecaLe(&bibliLe));
@@ -409,21 +375,14 @@ void interface(){
                         }
                     } else
                         if(opcED == 2){
-                            printFuncBiblio(&tamBibli);
+                            printFuncBiblio();
                             scanf("%d", &opcOperacao);
                             if (opcOperacao == 1) {
                                 system("clear");
-                                insereTextoArr(&textoArr, &bibliArr);
+                                insereTextoArr(&bibliArr);
                                 printf(YEL"----> Texto inserido!\n"RESET);
                             } else if (opcOperacao == 2) {
-                                system("clear");
-                                int pos = 0;
-                                printf(YEL"----> Posicao a ser removida: "RESET);
-                                scanf("%d", &pos);
-                                if(pos <= bibliArr.ultimo && pos >= 0) {
-                                    removeTextoArr(&textoArr, &bibliArr); //tem que mudar sa parada aq
-                                    printf(YEL"----> Texto removido!\n"RESET);
-                                }
+                                removeTextoArr(&bibliArr);
                             } else if (opcOperacao == 3) {
                                 system("clear");
                                 printf(YEL"----> Tamanho da biblioteca: "RESET"%d\n", tamanhoBibliotecaArr(&bibliArr));

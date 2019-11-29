@@ -1,8 +1,10 @@
 //
 // Created by lazarus on 21/11/19.
 //
-
+#define YEL   "\x1B[33m"
+#define RESET "\x1B[0m"
 #include "Texto.h"
+#include <time.h>
 
 
 //Operacoes por arranjo
@@ -22,8 +24,13 @@ void inserePalavraArr(TListaPArr *lista){
         lista->ultimo++;
     }
 }
-void removePalavraArr(TListaLArr *palavra, TListaPArr *lista){
-    //nao sei como vai ser a remoção
+void removePalavraArr(TListaPArr *lista){
+    if(lista->ultimo > 0){
+        printf(YEL"----> Palavra removida: " RESET);
+        imprimePalavraArr(&lista->palavra[lista->ultimo]);
+        lista->ultimo--;
+    } else
+        printf(YEL"----> Não é possível remover!" RESET);
 }
 void imprimeTextoArr(TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
     for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; i++) {
@@ -61,8 +68,17 @@ void inserePalavraLe(TListaPLe *lista, int tam){
         aux->indice = lista->tam;
     }
 }
-void removePalavraLe(TListaLLe *texto, TListaPLe *lista){
-    //nao sei como vai ser o criterio de remocao
+void removePalavraLe(TListaPLe *lista){
+    TCelulaP *aux;
+    if(lista->tam > 0) {
+        aux = lista->pUltimo;
+        lista->pUltimo = lista->pUltimo->pAnte;
+        lista->pUltimo->pProx = NULL;
+        printf(YEL"----> Palavra removida: " RESET);
+        imprimePalavraLe(&aux->palavra); //n sei se vai funcionar
+        free(aux);
+    } else
+        printf(YEL"----> Não é possível remover! "RESET);
 }
 void imprimeTextoLe(TListaPLe *lista){
     TCelulaP *aux = lista->pPrimeiro->pProx;

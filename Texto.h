@@ -31,17 +31,22 @@ typedef struct {
 
 //Arranjo
 typedef struct {
-    TListaLArr *palavra;
+    TListaLArr palavra[100];
     int primeiro;
     int ultimo;
 }TListaPArr; //Arranjo de Palavras = texto
 
 //Operacoes por arranjo
 void inicializaTextoArr(TListaPArr *lista);
-void inserePalavraArr(TListaPArr *lista);
+void inserePalavraArr(TListaPArr *lista, int tam);
 void removePalavraArr(TListaPArr *lista);
 void imprimeTextoArr(TListaPArr *listaPalavra);
 int tamanhoTextoArr(TListaPArr *lista);
+void selectionSortArr(TListaPArr texto);
+void quicksortTextoArr(TListaPArr texto);
+void ordenaTextoArr(int Esq, int Dir, TListaPArr *A);
+void particaoTextoArr (int Esq, int Dir, int *i, int *j, TListaPArr *A);
+
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);

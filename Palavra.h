@@ -4,6 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m"
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define RESET "\x1B[0m"
 
 //T-Item -----------
 typedef struct {
@@ -26,7 +35,7 @@ typedef struct {
 
 //Arranjo
 typedef struct {
-    Tletra *letra;
+    Tletra letra[100];
     char primeiraletra;
     int primeiro;
     int ultimo;
@@ -42,10 +51,10 @@ int tamanhoPalavraArr(TListaLArr *lista);
 //Operacoes por Lista Encadeada
 void inicializaPLe(TListaLLe *lista);
 void insereLetraLe(TListaLLe *lista);
-void removeLetraLe(TListaLLe *lista);
+void removeLetraLe(TListaLLe *celula);
 void imprimePalavraLe(TListaLLe *lista);
 int tamanhoPalavraLe(TListaLLe *lista);
-void quicksort(TListaLLe lista);
-void ordena(TCelulaL esq, TCelulaL dir, TListaLLe lista);
+void quicksort(TListaLLe *lista);
+void ordena(TCelulaL* esq, TCelulaL* dir, TListaLLe *lista);
 void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista);
 void troca(TCelulaL* i, TCelulaL* j);

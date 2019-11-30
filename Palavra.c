@@ -66,10 +66,16 @@ void insereLetraLe(TListaLLe *lista){
         lista->pUltimo->indice = lista->tam;
     }
 }
-void removeLetraLe(TCelulaL *celula){
-    //nao sei se e pra remover uma letra inserida e p+rocurar pela primeira ocorrencia
-    //nao sei se e pra remover uma posicao especifica
-    //nao sei se e pra remover a ultima/primeira letra
+void removeLetraLe(TListaLLe *lista){
+    TCelulaL *aux;
+    if(lista->tam > 0) {
+        aux = lista->pUltimo;
+        lista->pUltimo = lista->pUltimo->pAnte;
+        lista->pUltimo->pProx = NULL;
+        printf(YEL"----> Letra removida: " RESET "%c",aux->letra.letra);
+        free(aux);
+    } else
+        printf(YEL"----> Não é possível remover! "RESET);
 }
 void imprimePalavraLe(TListaLLe *lista){
     TCelulaL *aux;

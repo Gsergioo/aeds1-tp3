@@ -16,20 +16,19 @@ void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto){
     TListaPArr texto;
     inicializaBiblioArr(lista);
     for(int i = 0; i < qtdTexto; i++){
-        inicializaTextoArr(&texto);
+        inicializaTextoArr(&texto, qtdPalavras);
         inserePalavraArr(&texto, qtdPalavras);
         lista->biblioteca[lista->ultimo] = texto;
         lista->ultimo++;
     }
-    printf("Inserida!");
 }
 void removeTextoArr(TListaTArr *lista){
     if(lista->ultimo > 0){
-        printf(YEL"----> Texto removido: " RESET);
+        printf(YEL"----> Último texto removido!\n" RESET);
         imprimeTextoArr(&lista->biblioteca[lista->ultimo]);
         lista->ultimo--;
     } else
-        printf(YEL"----> Não é possível remover!" RESET);
+        printf(YEL"----> Não é possível remover!\n" RESET);
 }
 int tamanhoBibliotecaArr(TListaTArr *lista){
     return lista->ultimo;
@@ -37,7 +36,7 @@ int tamanhoBibliotecaArr(TListaTArr *lista){
 
 void imprimeBibliotecaArr(TListaTArr *lista){
     for (int i = 0; i < lista->ultimo; i++){
-        printf(YEL"----> Texto"RESET " %d!\n",i);
+        printf(YEL"----> Texto"RESET " %d!\n",i+1);
         imprimeTextoArr(&(lista->biblioteca[i]));
         printf("\n");
     }
@@ -54,16 +53,17 @@ void inicializaBiblioLe(TListaTLe *lista){
 }
 void insereTextoLe(TListaTLe *lista, int tam, int tam2){
     TCelulaT *aux;
-    int al;
-    for(int i = 0; i < tam; i++) {
-        al = 1 + rand()%26;
+    inicializaBiblioLe(lista);
+    //int al;
+    for(int i = 0; i < tam2; i++) {
+        //al = 1 + rand()%26;
         aux = (TCelulaT *) malloc(sizeof(TCelulaT));
         aux->pProx = NULL;
         aux->pAnte = lista->pUltimo;
         lista->pUltimo->pProx = aux;
         lista->pUltimo = aux;
         inicializaTextoLe(&(aux->texto));
-        inserePalavraLe(&(aux->texto), al);
+        inserePalavraLe(&(aux->texto), tam);
         lista->tam++;
         aux->indice = lista->tam;
     }
@@ -73,19 +73,27 @@ void removeTextoLe(TListaTLe *lista){
         TCelulaT *aux;
         aux = lista->pUltimo;
         lista->pUltimo = lista->pUltimo->pAnte;
-        printf(YEL"----> Último texto removido!" RESET);
+        printf(YEL"----> Texto"RESET" (%d)", lista->tam);
+        printf(YEL" removido!\n" RESET);
+        lista->tam--;
+        lista->pUltimo->pProx = NULL;
         free(aux);
     } else{
-        printf(YEL"----> Não é possível remover!" RESET);
+        printf(YEL"----> Não é possível remover!\n" RESET);
     }
 }
 void imprimeBibliotecaLe(TListaTLe *biblioteca){
     TCelulaT* aux = biblioteca->pPrimeiro->pProx;
+    int i = 1;
     while (aux != NULL){
+        printf(YEL"----> Texto"RESET " %d!\n",i);
         imprimeTextoLe(&(aux->texto));
-        printf(" Texto %d\n", aux->texto.tam);
         aux = aux->pProx;
+        i++;
+        printf("\n");
     }
+    if(biblioteca->tam == 0)
+        printf(YEL"----> Não há textos! :(\n"RESET);
 
 }
 

@@ -31,7 +31,7 @@ typedef struct {
 }TListaPArr; //Arranjo de Palavras = texto
 
 //Operacoes por arranjo
-void inicializaTextoArr(TListaPArr *lista);
+void inicializaTextoArr(TListaPArr *lista, int qtdPalavras);
 void inserePalavraArr(TListaPArr *lista, int tam);
 void removePalavraArr(TListaPArr *lista);
 void imprimeTextoArr(TListaPArr *listaPalavra);

@@ -9,13 +9,13 @@
 
 //Operacoes por arranjo
 
-void inicializaTextoArr(TListaPArr *lista){
-    lista->palavra = (TListaLArr*) malloc(10*sizeof(TListaLArr));
+void inicializaTextoArr(TListaPArr *lista, int qtdPalavras){
+    lista->palavra = (TListaLArr*) malloc(qtdPalavras*sizeof(TListaLArr));
     lista->primeiro = 0;
     lista->ultimo = 0;
 }
 void inserePalavraArr(TListaPArr *lista, int tam){
-    inicializaTextoArr(lista);
+    inicializaTextoArr(lista, tam);
     TListaLArr palavra;
     for(int i = 0; i < tam; i++){
         inicializaPArr(&palavra);

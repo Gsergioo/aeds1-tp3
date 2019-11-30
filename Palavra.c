@@ -9,13 +9,14 @@
 
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *palavra){
+    palavra->letra = (Tletra*) malloc(10* sizeof(char));
+    //preencher
     palavra->primeiro = 0;
     palavra->ultimo = palavra->primeiro;
-    palavra->letra = (Tletra*) malloc(45* sizeof(char));
 }
 void insereLetraArr(TListaLArr *lista){
     inicializaPArr(lista);
-    int tam = 1+rand()%44;
+    int tam = 1+rand()%9;
     for(int i = 0; i < tam; i++){
         lista->letra[i].letra = 'a' + rand()%26;
         lista->ultimo++;

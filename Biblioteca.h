@@ -1,9 +1,3 @@
-//
-// Created by lazarus on 21/11/19.
-//
-
-#include "Texto.h"
-
 //T-Item num tem mais kkkjjjjj
 /*
 typedef struct {
@@ -35,9 +29,12 @@ void inicializaBiblioArr(TListaTArr *lista);
 void insereTextoArr(TListaTArr *lista);
 void removeTextoArr(TListaTArr *lista);
 int tamanhoBibliotecaArr(TListaTArr *lista);
+void imprimeBibliotecaArr(TListaTArr* lista);
 
 //Operacoes por lista encadeada
 void inicializaBiblioLe(TListaTLe *lista);
 void insereTextoLe(TListaTLe *lista, int tam, int tam2);
 void removeTextoLe(TListaTLe *lista);
 int tamanhoBibliotecaLe(TListaTLe *lista);
+void imprimeBibliotecaLe(TListaTLe *biblioteca);
+void selectionSortBibLe(TListaTLe lista);

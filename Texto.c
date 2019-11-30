@@ -1,23 +1,20 @@
 //
 // Created by lazarus on 21/11/19.
 //
-#define YEL   "\x1B[33m"
-#define RESET "\x1B[0m"
+
 #include "Texto.h"
-#include <time.h>
 
 
 //Operacoes por arranjo
 
 void inicializaTextoArr(TListaPArr *lista){
-    lista->palavra = (TListaLArr*) malloc(10*sizeof(TListaLArr));
     lista->primeiro = 0;
     lista->ultimo = 0;
 }
-void inserePalavraArr(TListaPArr *lista){
+
+void inserePalavraArr(TListaPArr *lista, int opcao){
     TListaLArr palavra;
-    int tam = 0 + rand()%100; // Gera o tamanho aleatorio do texto
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < opcao; i++){
         inicializaPArr(&palavra);
         insereLetraArr(&palavra);
         lista->palavra[lista->ultimo] = palavra;
@@ -25,20 +22,60 @@ void inserePalavraArr(TListaPArr *lista){
     }
 }
 void removePalavraArr(TListaPArr *lista){
-    if(lista->ultimo > 0){
-        printf(YEL"----> Palavra removida: " RESET);
-        imprimePalavraArr(&lista->palavra[lista->ultimo]);
-        lista->ultimo--;
-    } else
-        printf(YEL"----> Não é possível remover!" RESET);
+    //nao sei como vai ser a remoção
 }
 void imprimeTextoArr(TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
     for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; i++) {
         imprimePalavraArr(&(listaPalavra->palavra[i]));
     }
+    printf("\n");
 }
 int tamanhoTextoArr(TListaPArr *lista){
     return lista->ultimo;
+}
+
+void selectionSortArr(TListaPArr texto){
+    int min, i, j;
+    TListaLArr aux;
+    for(i = 0; i < texto.ultimo - 1; i++){
+        min = i;
+        for(j = i + 1; j < texto.ultimo; j++)
+            if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra)
+                min = j;
+        aux = texto.palavra[i];
+        texto.palavra[i] = texto.palavra[min];
+        texto.palavra[min] = aux;
+    }
+    imprimeTextoArr(&texto);
+}
+
+void quicksortTextoArr(TListaPArr textoo)
+{
+    ordenaTextoArr(0, textoo.ultimo - 1, &textoo);
+    imprimeTextoArr(&textoo);
+}
+
+void ordenaTextoArr(int esq, int dir, TListaPArr *texto){
+    int i, j;
+    particaoTextoArr(esq, dir, &i, &j, texto);
+
+    if (esq < j) ordenaTextoArr(esq, j, texto);
+    if (i < dir) ordenaTextoArr(i, dir, texto);
+}
+
+void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto){
+    char pivo;
+    TListaLArr aux;
+    *i = esq; *j = dir;
+    pivo = texto->palavra[(esq + dir)/2].primeiraletra;
+    do{
+        while(pivo > texto->palavra[*i].primeiraletra) (*i)++;
+        while(pivo < texto->palavra[*j].primeiraletra) (*j)--;
+        if (*i <= *j){
+            aux = texto->palavra[*i]; texto->palavra[*i] = texto->palavra[*j]; texto->palavra[*j] = aux;
+            (*i)++; (*j)--;
+        }
+    }while(*i <= *j);
 }
 
 //----------------------------------------------------------
@@ -55,7 +92,6 @@ void inicializaTextoLe(TListaPLe *lista){
 }
 void inserePalavraLe(TListaPLe *lista, int tam){
     TCelulaP *aux = NULL;
-    srand(time(NULL));
     for(int i = 0; i < tam; i++){
         aux = (TCelulaP*) malloc(sizeof(TCelulaP));
         aux->pProx = NULL;
@@ -69,16 +105,7 @@ void inserePalavraLe(TListaPLe *lista, int tam){
     }
 }
 void removePalavraLe(TListaPLe *lista){
-    TCelulaP *aux;
-    if(lista->tam > 0) {
-        aux = lista->pUltimo;
-        lista->pUltimo = lista->pUltimo->pAnte;
-        lista->pUltimo->pProx = NULL;
-        printf(YEL"----> Palavra removida: " RESET);
-        imprimePalavraLe(&aux->palavra); //n sei se vai funcionar
-        free(aux);
-    } else
-        printf(YEL"----> Não é possível remover! "RESET);
+    //nao sei como vai ser o criterio de remocao
 }
 void imprimeTextoLe(TListaPLe *lista){
     TCelulaP *aux = lista->pPrimeiro->pProx;
@@ -122,6 +149,7 @@ void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, T
     for(int k = 1; k < ((int)(i->indice + j->indice)/2); k++)
         aux = aux->pProx;
     pivo = aux->palavra.primeiraletra;
+    printf("pivo: %c ", pivo);
     do{
         while(i->palavra.primeiraletra < pivo) {i = i->pProx; cont1++; (*comp)++;}
         while (j->palavra.primeiraletra > pivo){ j = j->pAnte; cont2--; (*comp)++;}
@@ -148,6 +176,8 @@ void trocaTexto(TCelulaP* i, TCelulaP* j){
 }
 
 void selectionSort(TListaPLe texto){
+    imprimeTextoLe(&texto);
+    printf("%d", texto.tam);
     TCelulaP *aux, *aux2;
     TCelulaP* min = texto.pPrimeiro;
 
@@ -155,9 +185,9 @@ void selectionSort(TListaPLe texto){
     for (int i = 0; i < texto.tam - 1; i++){
         min = min->pProx;
         palavra = min->palavra;
-        printf("\n%c\n", min->palavra.primeiraletra);
-        aux = min->pProx->pProx;
-        for (int j = i + 1; j < texto.tam - 1; j++){
+        aux = min->pProx;
+        aux2 = min;
+        for (int j = i + 1; j < texto.tam; j++){
             if (palavra.primeiraletra > aux->palavra.primeiraletra){
                 palavra = aux->palavra;
                 aux2 = aux;

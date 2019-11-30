@@ -6,38 +6,14 @@
 
 #IncludeRegexTransform: 
 
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.c
-Biblioteca.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.h
-stdlib.h
--
-
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.h
-Texto.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.h
-
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Interface.c
-Biblioteca.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.h
-stdio.h
--
-stdlib.h
--
-
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Interface.h
-Biblioteca.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Biblioteca.h
-
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.c
-Palavra.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.h
-
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.h
 stdio.h
 -
 stdlib.h
 -
 string.h
+-
+locale.h
 -
 
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.c
@@ -49,10 +25,4 @@ time.h
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Texto.h
 Palavra.h
 /home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Palavra.h
-
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/main.c
-stdio.h
--
-Interface.h
-/home/lazarus/Área de Trabalho/UFV/2_Semestre/AEDS1/TPs/aeds1-tp3/Interface.h
 

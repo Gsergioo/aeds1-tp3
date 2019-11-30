@@ -2,19 +2,22 @@
 // Created by lazarus on 21/11/19.
 //
 
+#define YEL   "\x1B[33m"
+#define RESET "\x1B[0m"
 #include "Texto.h"
-
+#include <time.h>
 
 //Operacoes por arranjo
 
 void inicializaTextoArr(TListaPArr *lista){
+    lista->palavra = (TListaLArr*) malloc(10*sizeof(TListaLArr));
     lista->primeiro = 0;
     lista->ultimo = 0;
 }
-
-void inserePalavraArr(TListaPArr *lista, int opcao){
+void inserePalavraArr(TListaPArr *lista, int tam){
+    inicializaTextoArr(lista);
     TListaLArr palavra;
-    for(int i = 0; i < opcao; i++){
+    for(int i = 0; i < tam; i++){
         inicializaPArr(&palavra);
         insereLetraArr(&palavra);
         lista->palavra[lista->ultimo] = palavra;
@@ -22,13 +25,18 @@ void inserePalavraArr(TListaPArr *lista, int opcao){
     }
 }
 void removePalavraArr(TListaPArr *lista){
-    //nao sei como vai ser a remoção
+    if(lista->ultimo > 0){
+        printf(YEL"----> Palavra removida: " RESET);
+        imprimePalavraArr(&lista->palavra[lista->ultimo-1]);
+        lista->ultimo--;
+        printf("\n");
+    } else
+        printf(YEL"----> Não é possível remover!\n" RESET);
 }
 void imprimeTextoArr(TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
     for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; i++) {
-        imprimePalavraArr(&(listaPalavra->palavra[i]));
+        imprimePalavraArr(&listaPalavra->palavra[i]);
     }
-    printf("\n");
 }
 int tamanhoTextoArr(TListaPArr *lista){
     return lista->ultimo;
@@ -91,7 +99,9 @@ void inicializaTextoLe(TListaPLe *lista){
     lista->pPrimeiro->indice = -1;
 }
 void inserePalavraLe(TListaPLe *lista, int tam){
+    inicializaTextoLe(lista);
     TCelulaP *aux = NULL;
+    srand(time(NULL));
     for(int i = 0; i < tam; i++){
         aux = (TCelulaP*) malloc(sizeof(TCelulaP));
         aux->pProx = NULL;
@@ -105,7 +115,18 @@ void inserePalavraLe(TListaPLe *lista, int tam){
     }
 }
 void removePalavraLe(TListaPLe *lista){
-    //nao sei como vai ser o criterio de remocao
+    TCelulaP *aux;
+    if(lista->tam > 0) {
+        aux = lista->pUltimo;
+        lista->pUltimo = lista->pUltimo->pAnte;
+        lista->pUltimo->pProx = NULL;
+        printf(YEL"----> Palavra removida: " RESET);
+        imprimePalavraLe(&aux->palavra); //n sei se vai funcionar
+        printf("\n");
+        lista->tam--;
+        free(aux);
+    } else
+        printf(YEL"----> Não é possível remover!\n"RESET);
 }
 void imprimeTextoLe(TListaPLe *lista){
     TCelulaP *aux = lista->pPrimeiro->pProx;

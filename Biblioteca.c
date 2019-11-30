@@ -3,6 +3,8 @@
 //
 
 #include "Biblioteca.h"
+#define YEL   "\x1B[33m"
+#define RESET "\x1B[0m"
 
 //Operacoes por arranjo
 void inicializaBiblioArr(TListaTArr *lista){
@@ -10,11 +12,12 @@ void inicializaBiblioArr(TListaTArr *lista){
     lista->primeiro = 0;
     lista->ultimo = lista->primeiro;
 }
-void insereTextoArr(TListaTArr *lista){
+void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto){
     TListaPArr texto;
-    for(int i = 0; i < 10; i++){
+    inicializaBiblioArr(lista);
+    for(int i = 0; i < qtdTexto; i++){
         inicializaTextoArr(&texto);
-        inserePalavraArr(&texto, 10);
+        inserePalavraArr(&texto, qtdPalavras);
         lista->biblioteca[lista->ultimo] = texto;
         lista->ultimo++;
     }
@@ -34,8 +37,9 @@ int tamanhoBibliotecaArr(TListaTArr *lista){
 
 void imprimeBibliotecaArr(TListaTArr *lista){
     for (int i = 0; i < lista->ultimo; i++){
+        printf(YEL"----> Texto"RESET " %d!\n",i);
         imprimeTextoArr(&(lista->biblioteca[i]));
-        printf("Texto n \n");
+        printf("\n");
     }
 }
 
@@ -50,7 +54,7 @@ void inicializaBiblioLe(TListaTLe *lista){
 }
 void insereTextoLe(TListaTLe *lista, int tam, int tam2){
     TCelulaT *aux;
-    int al = rand()%26;
+    int al;
     for(int i = 0; i < tam; i++) {
         al = 1 + rand()%26;
         aux = (TCelulaT *) malloc(sizeof(TCelulaT));

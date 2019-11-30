@@ -2,6 +2,8 @@
 // Created by lazarus on 21/11/19.
 //
 
+#define YEL   "\x1B[33m"
+#define RESET "\x1B[0m"
 #include "Palavra.h"
 
 
@@ -9,23 +11,23 @@
 void inicializaPArr(TListaLArr *palavra){
     palavra->primeiro = 0;
     palavra->ultimo = palavra->primeiro;
+    palavra->letra = (Tletra*) malloc(45* sizeof(char));
 }
-
 void insereLetraArr(TListaLArr *lista){
-    int tam = 1 + rand()%9;
+    inicializaPArr(lista);
+    int tam = 1+rand()%44;
     for(int i = 0; i < tam; i++){
-        lista->letra[lista->ultimo].letra = 'a' + rand()%26;
+        lista->letra[i].letra = 'a' + rand()%26;
         lista->ultimo++;
     }
-    lista->primeiraletra = lista->letra[0].letra;
 }
 
 void removeLetraArr(TListaLArr *lista){
     if(lista->ultimo > 0){
-        printf(YEL"----> Letra removida! " RESET "%c", lista->letra[lista->ultimo].letra);
+        printf(YEL"----> Letra removida! " RESET "%c\n", lista->letra[lista->ultimo-1].letra);
         lista->ultimo--;
     } else
-        printf(YEL"----> Não é possível remover!" RESET);
+        printf(YEL"----> Não é possível remover!\n" RESET);
 }
 
 void imprimePalavraArr(TListaLArr *lista){
@@ -43,7 +45,7 @@ int tamanhoPalavraArr(TListaLArr *lista){
 //Operacoes por Lista Encadeada                                                                                                  l
                                                                                                                                //p
                                                                                                                                //!
-void inicializaPLe(TListaLLe *lista){                                                                                          //!
+void inicializaPLe(TListaLLe *lista){
     lista->pPrimeiro = (TCelulaL*) malloc(sizeof(TCelulaL));
     lista->pUltimo = lista->pPrimeiro;
     lista->pPrimeiro->indice = -1;
@@ -52,8 +54,9 @@ void inicializaPLe(TListaLLe *lista){                                           
     lista->tam = 0;
 }
 void insereLetraLe(TListaLLe *lista){
+    inicializaPLe(lista);
     TCelulaL *aux;
-    int tam = 1 + rand()%10;
+    int tam = rand()%45;
     for(int i = 0; i < tam; i++){
         aux = (TCelulaL*) malloc(sizeof(TCelulaL));
         aux->pProx = NULL;
@@ -72,10 +75,11 @@ void removeLetraLe(TListaLLe *lista){
         aux = lista->pUltimo;
         lista->pUltimo = lista->pUltimo->pAnte;
         lista->pUltimo->pProx = NULL;
-        printf(YEL"----> Letra removida: " RESET "%c",aux->letra.letra);
+        printf(YEL"----> Letra removida: " RESET "%c\n",aux->letra.letra);
         free(aux);
+        lista->tam--;
     } else
-        printf(YEL"----> Não é possível remover! "RESET);
+        printf(YEL"----> Não é possível remover!\n"RESET);
 }
 void imprimePalavraLe(TListaLLe *lista){
     TCelulaL *aux;
@@ -90,53 +94,3 @@ int tamanhoPalavraLe(TListaLLe *lista){
     return lista->tam;
 }
 
-void ordena(TCelulaL* esq, TCelulaL* dir, TListaLLe *lista){
-    TCelulaL* i;
-    TCelulaL* j;
-    particao(esq, dir, &i, &j, lista);
-    printf("indice i: %c ", i->letra);
-    printf("indice j : %c ", j->letra);
-
-    if(esq->indice < j->indice) ordena(esq, j, lista);
-    if(dir->indice > i->indice) ordena(i, dir, lista);
-}
-
-
-void quicksort(TListaLLe *lista){
-    ordena(lista->pPrimeiro->pProx, lista->pUltimo, lista);
-}
-
-void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista){
-    char pivo;
-    int cont1, cont2;
-    cont1 = esq->indice;
-    cont2 = dir->indice;
-    TCelulaL* aux = lista->pPrimeiro->pProx;
-    TCelulaL* i = esq;
-    TCelulaL* j = dir;
-    int tam = (cont1 + cont2)/2;
-    for(int k = 1; k < (tam); k++)
-        aux = aux->pProx;
-    pivo = aux->letra.letra;
-    printf("pivo: %c", pivo);
-    do{
-        while(i->letra.letra < pivo) {i = i->pProx; cont1++;}
-        while (j->letra.letra > pivo){ j = j->pAnte; cont2--;}
-        if(cont1 <= cont2){
-            troca(i, j);
-            i = i->pProx;
-            cont1++;
-            cont2--;
-            j = j->pAnte;
-        }
-    }while(cont1 <= cont2);
-    *ii = i;
-    *jj = j;
-}
-
-void troca(TCelulaL* i, TCelulaL* j){
-    char aux;
-    aux = i->letra.letra;
-    i->letra.letra = j->letra.letra;
-    j->letra.letra = aux;
-}

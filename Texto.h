@@ -9,12 +9,6 @@
  */
 
 #include "Palavra.h"
-//T-Item--------- Num tem mais kkkkjjjj
-/*
-typedef struct {
-    Tletra *palavra;
-}TPalavra;
-*/
 //Lista encadeada
 typedef struct CelulaP{ //celula contendo uma palavra
     struct CelulaP *pProx, *pAnte;
@@ -31,7 +25,7 @@ typedef struct {
 
 //Arranjo
 typedef struct {
-    TListaLArr palavra[100];
+    TListaLArr *palavra;
     int primeiro;
     int ultimo;
 }TListaPArr; //Arranjo de Palavras = texto

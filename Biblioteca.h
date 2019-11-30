@@ -1,3 +1,9 @@
+//
+// Created by lazarus on 21/11/19.
+//
+
+#include "Texto.h"
+
 //T-Item num tem mais kkkjjjjj
 /*
 typedef struct {
@@ -26,7 +32,7 @@ typedef struct {
 
 //Operacoes por arranjo
 void inicializaBiblioArr(TListaTArr *lista);
-void insereTextoArr(TListaTArr *lista);
+void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto);
 void removeTextoArr(TListaTArr *lista);
 int tamanhoBibliotecaArr(TListaTArr *lista);
 void imprimeBibliotecaArr(TListaTArr* lista);

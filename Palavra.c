@@ -1,8 +1,7 @@
 //
 // Created by lazarus on 21/11/19.
 //
-#define YEL   "\x1B[33m"
-#define RESET "\x1B[0m"
+
 #include "Palavra.h"
 
 
@@ -10,14 +9,15 @@
 void inicializaPArr(TListaLArr *palavra){
     palavra->primeiro = 0;
     palavra->ultimo = palavra->primeiro;
-    palavra->letra = (Tletra*) malloc(45* sizeof(char));
 }
+
 void insereLetraArr(TListaLArr *lista){
-    int tam = rand()%44;
+    int tam = 1 + rand()%9;
     for(int i = 0; i < tam; i++){
-        lista->letra[i].letra = 'a' + rand()%26;
+        lista->letra[lista->ultimo].letra = 'a' + rand()%26;
         lista->ultimo++;
     }
+    lista->primeiraletra = lista->letra[0].letra;
 }
 
 void removeLetraArr(TListaLArr *lista){
@@ -38,13 +38,12 @@ int tamanhoPalavraArr(TListaLArr *lista){
     return lista->ultimo;
 }
 
-//-------------------------------------------------------------------------------------
-
-
-//Operacoes por Lista Encadeada
-
-
-void inicializaPLe(TListaLLe *lista){
+//-------------------------------------------------------------------------------------                                          h
+                                                                                                                               //e
+//Operacoes por Lista Encadeada                                                                                                  l
+                                                                                                                               //p
+                                                                                                                               //!
+void inicializaPLe(TListaLLe *lista){                                                                                          //!
     lista->pPrimeiro = (TCelulaL*) malloc(sizeof(TCelulaL));
     lista->pUltimo = lista->pPrimeiro;
     lista->pPrimeiro->indice = -1;
@@ -54,8 +53,8 @@ void inicializaPLe(TListaLLe *lista){
 }
 void insereLetraLe(TListaLLe *lista){
     TCelulaL *aux;
-    int tam = rand()%10;
-    for(int i = 0; i < 10; i++){
+    int tam = 1 + rand()%10;
+    for(int i = 0; i < tam; i++){
         aux = (TCelulaL*) malloc(sizeof(TCelulaL));
         aux->pProx = NULL;
         aux->pAnte = lista->pUltimo;
@@ -67,16 +66,10 @@ void insereLetraLe(TListaLLe *lista){
         lista->pUltimo->indice = lista->tam;
     }
 }
-void removeLetraLe(TListaLLe *lista){
-    TCelulaL *aux;
-    if(lista->tam > 0) {
-        aux = lista->pUltimo;
-        lista->pUltimo = lista->pUltimo->pAnte;
-        lista->pUltimo->pProx = NULL;
-        printf(YEL"----> Letra removida: " RESET "%c",aux->letra.letra);
-        free(aux);
-    } else
-        printf(YEL"----> Não é possível remover! "RESET);
+void removeLetraLe(TCelulaL *celula){
+    //nao sei se e pra remover uma letra inserida e p+rocurar pela primeira ocorrencia
+    //nao sei se e pra remover uma posicao especifica
+    //nao sei se e pra remover a ultima/primeira letra
 }
 void imprimePalavraLe(TListaLLe *lista){
     TCelulaL *aux;
@@ -91,21 +84,20 @@ int tamanhoPalavraLe(TListaLLe *lista){
     return lista->tam;
 }
 
-// ---------------------------------- passar apenas a lista
-void ordena(TCelulaL esq, TCelulaL dir, TListaLLe lista){
+void ordena(TCelulaL* esq, TCelulaL* dir, TListaLLe *lista){
     TCelulaL* i;
     TCelulaL* j;
-    particao(&esq, &dir, &i, &j, &lista);
-    printf("indice i: %c ", i->letra.letra);
-    printf("indice j : %c ", j->letra.letra);
+    particao(esq, dir, &i, &j, lista);
+    printf("indice i: %c ", i->letra);
+    printf("indice j : %c ", j->letra);
 
-    if(esq.indice < j->indice) ordena(esq, *j, lista);
-    if(dir.indice > i->indice) ordena(*i, dir, lista);
+    if(esq->indice < j->indice) ordena(esq, j, lista);
+    if(dir->indice > i->indice) ordena(i, dir, lista);
 }
 
 
-void quicksort(TListaLLe lista){
-    ordena(*lista.pPrimeiro->pProx, *lista.pUltimo, lista);
+void quicksort(TListaLLe *lista){
+    ordena(lista->pPrimeiro->pProx, lista->pUltimo, lista);
 }
 
 void particao(TCelulaL* esq, TCelulaL* dir, TCelulaL** ii, TCelulaL** jj, TListaLLe* lista){

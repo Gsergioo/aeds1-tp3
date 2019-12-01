@@ -40,7 +40,7 @@ void selectionSortArr(TListaPArr texto);
 void quicksortTextoArr(TListaPArr texto);
 void ordenaTextoArr(int Esq, int Dir, TListaPArr *A);
 void particaoTextoArr (int Esq, int Dir, int *i, int *j, TListaPArr *A);
-
+void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia);
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);
@@ -53,4 +53,4 @@ void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double* comp);
 void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double* comp);
 void trocaTexto(TCelulaP* i, TCelulaP* j);
 void selectionSort (TListaPLe texto);
-void imprimecopia(TListaPLe texto);
+void criaCopiaTextoLe (TListaPLe* lista, TListaPLe* listacopia);

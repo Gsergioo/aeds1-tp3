@@ -86,6 +86,14 @@ void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto){
     }while(*i <= *j);
 }
 
+void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia){
+    inicializaTextoArr(listacopia, 10);
+    for (int i = 0; i < lista->ultimo; i++){
+        listacopia->palavra[i] = lista->palavra[i];
+        listacopia->ultimo = lista->ultimo;
+    }
+}
+
 //----------------------------------------------------------
 
 //Operacoes por Lista encadeada
@@ -221,4 +229,21 @@ void selectionSort(TListaPLe texto){
     }
     printf("\n");
     imprimeTextoLe(&texto);
+}
+
+void criaCopiaTextoLe(TListaPLe* lista, TListaPLe* listacopia){
+    inicializaTextoLe(listacopia);
+    listacopia->tam = lista->tam;
+    TCelulaP *aux, *aux2;
+    aux2 = lista->pPrimeiro->pProx;
+    while(aux2 != NULL){
+        aux = (TCelulaP*)malloc(sizeof(TCelulaP));
+        aux->palavra = aux2->palavra;
+        aux->indice = aux2->indice;
+        aux->pProx = NULL;
+        aux->pAnte = listacopia->pUltimo;
+        listacopia->pUltimo->pProx = aux;
+        listacopia->pUltimo = aux;
+        aux2 = aux2->pProx;
+    }
 }

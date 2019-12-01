@@ -32,25 +32,25 @@ typedef struct {
 
 //Operacoes por arranjo
 void inicializaTextoArr(TListaPArr *lista, int qtdPalavras);
-void inserePalavraArr(TListaPArr *lista, int tam);
+void inserePalavraArr(TListaPArr *lista, int min, int max);
 void removePalavraArr(TListaPArr *lista);
 void imprimeTextoArr(TListaPArr *listaPalavra);
 int tamanhoTextoArr(TListaPArr *lista);
 void selectionSortArr(TListaPArr texto);
 void quicksortTextoArr(TListaPArr texto);
-void ordenaTextoArr(int Esq, int Dir, TListaPArr *A);
-void particaoTextoArr (int Esq, int Dir, int *i, int *j, TListaPArr *A);
+void ordenaTextoArr(int Esq, int Dir, TListaPArr *A, double* comp, double* mov);
+void particaoTextoArr (int Esq, int Dir, int *i, int *j, TListaPArr *A, double* comp, double* mov);
 void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia);
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);
-void inserePalavraLe(TListaPLe *lista, int tam);
+void inserePalavraLe(TListaPLe *lista, int min, int max);
 void removePalavraLe(TListaPLe *lista);
 void imprimeTextoLe(TListaPLe *lista);
 int tamanhoTextoLe(TListaPLe *lista);
 void quicksortTexto(TListaPLe texto);
-void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double* comp);
-void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double* comp);
+void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double* comp, double* mov);
+void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double* comp, double* mov);
 void trocaTexto(TCelulaP* i, TCelulaP* j);
 void selectionSort (TListaPLe texto);
 void criaCopiaTextoLe (TListaPLe* lista, TListaPLe* listacopia);

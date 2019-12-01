@@ -32,26 +32,25 @@ typedef struct {
 
 //Operacoes por arranjo
 void inicializaBiblioArr(TListaTArr *lista);
-void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto);
+void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto, int min, int max);
 void removeTextoArr(TListaTArr *lista);
 int tamanhoBibliotecaArr(TListaTArr *lista);
 void imprimeBibliotecaArr(TListaTArr* lista);
 void selectionSortBibArr(TListaTArr lista);
 void quicksortBibArr(TListaTArr lista);
-void ordenaBibArr(int esq, int dir, TListaTArr *lista);
-void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista);
+void ordenaBibArr(int esq, int dir, TListaTArr *lista, double* comp, double* mov);
+void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista, double* comp, double* mov);
 void criaCopiaBibArr(TListaTArr* lista, TListaTArr* listacopia);
 
 //Operacoes por lista encadeada
 void inicializaBiblioLe(TListaTLe *lista);
-void insereTextoLe(TListaTLe *lista, int tam, int tam2);
+void insereTextoLe(TListaTLe *lista, int qtdtexto, int min, int max);
 void removeTextoLe(TListaTLe *lista);
 int tamanhoBibliotecaLe(TListaTLe *lista);
 void imprimeBibliotecaLe(TListaTLe *biblioteca);
 void selectionSortBibLe(TListaTLe lista);
 void quicksortBibLe(TListaTLe lista);
-void ordenaBibLe(TCelulaT* esq, TCelulaT* dir, TListaTLe *texto, double* comp);
-void particaoBibLe(TCelulaT* esq, TCelulaT* dir, TCelulaT** ii, TCelulaT** jj, TListaTLe* texto, double* comp);
+void ordenaBibLe(TCelulaT* esq, TCelulaT* dir, TListaTLe *texto, double* comp, double* mov);
+void particaoBibLe(TCelulaT* esq, TCelulaT* dir, TCelulaT** ii, TCelulaT** jj, TListaTLe* texto, double* comp, double* mov);
 void trocaBibLe(TCelulaT* i, TCelulaT* j);
 void criaCopiaBibLe (TListaTLe* lista, TListaTLe* listacopia);
-

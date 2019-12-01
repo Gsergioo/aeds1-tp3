@@ -233,3 +233,20 @@ void trocaBibLe(TCelulaT* i, TCelulaT* j){
     i->texto = j->texto;
     j->texto = aux;
 }
+
+void criaCopiaBibLe(TListaTLe* lista, TListaTLe* listacopia){
+    inicializaBiblioLe(listacopia);
+    listacopia->tam = lista->tam;
+    TCelulaT *aux, *aux2;
+    aux2 = lista->pPrimeiro->pProx;
+    while(aux2 != NULL){
+        aux = (TCelulaT*)malloc(sizeof(TCelulaT));
+        aux->texto= aux2->texto;
+        aux->indice = aux2->indice;
+        aux->pProx = NULL;
+        aux->pAnte = listacopia->pUltimo;
+        listacopia->pUltimo->pProx = aux;
+        listacopia->pUltimo = aux;
+        aux2 = aux2->pProx;
+    }
+}

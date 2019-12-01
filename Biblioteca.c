@@ -86,6 +86,14 @@ void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista){
     }while(*i <= *j);
 }
 
+void criaCopiaBibArr(TListaTArr* lista, TListaTArr* listacopia){
+    inicializaBiblioArr(listacopia);
+    for (int i = 0; i < lista->ultimo; i++){
+        listacopia->biblioteca[i] = lista->biblioteca[i];
+        listacopia->ultimo = lista->ultimo;
+    }
+}
+
 //Operacoes por lista encadeada
 void inicializaBiblioLe(TListaTLe *lista){
     lista->pPrimeiro = (TCelulaT*) malloc(sizeof(TCelulaT));

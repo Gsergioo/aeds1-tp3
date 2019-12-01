@@ -14,10 +14,11 @@ void inicializaTextoArr(TListaPArr *lista, int qtdPalavras){
     lista->primeiro = 0;
     lista->ultimo = 0;
 }
-void inserePalavraArr(TListaPArr *lista, int tam){
+void inserePalavraArr(TListaPArr *lista, int min, int max){
     inicializaTextoArr(lista, tam);
     TListaLArr palavra;
-    for(int i = 0; i < tam; i++){
+    int intervalo = min + rand()%(max - min + 1);
+    for(int i = 0; i < intervalo; i++){
         inicializaPArr(&palavra);
         insereLetraArr(&palavra);
         lista->palavra[lista->ultimo] = palavra;
@@ -43,43 +44,54 @@ int tamanhoTextoArr(TListaPArr *lista){
 }
 
 void selectionSortArr(TListaPArr texto){
+    double comp;
     int min, i, j;
     TListaLArr aux;
     for(i = 0; i < texto.ultimo - 1; i++){
         min = i;
         for(j = i + 1; j < texto.ultimo; j++)
             if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra)
+                comp++;
                 min = j;
         aux = texto.palavra[i];
         texto.palavra[i] = texto.palavra[min];
         texto.palavra[min] = aux;
     }
     imprimeTextoArr(&texto);
+    printf("Numero de comparações: %lf", comp);
 }
 
 void quicksortTextoArr(TListaPArr textoo)
 {
-    ordenaTextoArr(0, textoo.ultimo - 1, &textoo);
+    double comp, mov;
+    ordenaTextoArr(0, textoo.ultimo - 1, &textoo, &comp, &mov);
     imprimeTextoArr(&textoo);
+    printf("\nNumero de comparacoes: %lf\n", comp);
+    printf("Numero de movimentações: %lf\n", mov);
+    
 }
 
-void ordenaTextoArr(int esq, int dir, TListaPArr *texto){
+void ordenaTextoArr(int esq, int dir, TListaPArr *texto, double* comp, double* mov){
     int i, j;
-    particaoTextoArr(esq, dir, &i, &j, texto);
+    particaoTextoArr(esq, dir, &i, &j, texto, comp, mov);
 
-    if (esq < j) ordenaTextoArr(esq, j, texto);
-    if (i < dir) ordenaTextoArr(i, dir, texto);
+    (*comp)++;
+    if (esq < j) ordenaTextoArr(esq, j, texto, comp, mov);
+    (*comp)++;
+    if (i < dir) ordenaTextoArr(i, dir, texto, comp, mov);
 }
 
-void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto){
+void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto, double* comp, double* mov){
     char pivo;
     TListaLArr aux;
     *i = esq; *j = dir;
     pivo = texto->palavra[(esq + dir)/2].primeiraletra;
     do{
-        while(pivo > texto->palavra[*i].primeiraletra) (*i)++;
-        while(pivo < texto->palavra[*j].primeiraletra) (*j)--;
+        while(pivo > texto->palavra[*i].primeiraletra) {(*i)++; (*comp)++;}
+        while(pivo < texto->palavra[*j].primeiraletra) {(*j)--; (*comp)++;}
         if (*i <= *j){
+            (*comp)++;
+            (*mov)++;
             aux = texto->palavra[*i]; texto->palavra[*i] = texto->palavra[*j]; texto->palavra[*j] = aux;
             (*i)++; (*j)--;
         }
@@ -106,11 +118,11 @@ void inicializaTextoLe(TListaPLe *lista){
     lista->tam = 0;
     lista->pPrimeiro->indice = -1;
 }
-void inserePalavraLe(TListaPLe *lista, int tam){
+void inserePalavraLe(TListaPLe *lista, int min, int max){
     inicializaTextoLe(lista);
     TCelulaP *aux = NULL;
-    srand(time(NULL));
-    for(int i = 0; i < tam; i++){
+    int intevralo = rand()%(max - min + 1);
+    for(int i = 0; i < intervalo; i++){
         aux = (TCelulaP*) malloc(sizeof(TCelulaP));
         aux->pProx = NULL;
         aux->pAnte = lista->pUltimo;
@@ -147,25 +159,26 @@ int tamanhoTextoLe(TListaPLe *lista){
     return lista->tam;
 }
 
-void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double *comp){
+void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double *comp, double* mov){
     TCelulaP *i, *j;
-    particaoTexto(esq, dir, &i, &j, texto, comp);
+    particaoTexto(esq, dir, &i, &j, texto, comp, mov);
 
-
-    if(esq->indice < j->indice) ordenaTexto(esq, j, texto, comp);
-    if(dir->indice > i->indice) ordenaTexto(i, dir, texto, comp);
+    (*comp)++;
+    if(esq->indice < j->indice) ordenaTexto(esq, j, texto, comp, mov);
+    (*comp)++;
+    if(dir->indice > i->indice) ordenaTexto(i, dir, texto, comp, mov);
 }
 
 
 void quicksortTexto(TListaPLe texto){
-    double comp;
+    double comp, mov;
     comp = 0;
     ordenaTexto(texto.pPrimeiro->pProx, texto.pUltimo, &texto, &comp);
     printf("\n\n comp: %lf\n", comp);
     imprimeTextoLe(&texto);
 }
 
-void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double *comp){
+void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double *comp, double* mov){
     int pivo;
     int cont1, cont2;
     TCelulaP* i;
@@ -186,6 +199,7 @@ void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, T
         (*comp)++;
         if(cont1 <= cont2){
             trocaTexto(i, j);
+            (*mov)++;
             i = i->pProx;
             cont1++;
             cont2--;
@@ -205,6 +219,7 @@ void trocaTexto(TCelulaP* i, TCelulaP* j){
 }
 
 void selectionSort(TListaPLe texto){
+    double comp;
     imprimeTextoLe(&texto);
     printf("%d", texto.tam);
     TCelulaP *aux, *aux2;
@@ -218,6 +233,7 @@ void selectionSort(TListaPLe texto){
         aux2 = min;
         for (int j = i + 1; j < texto.tam; j++){
             if (palavra.primeiraletra > aux->palavra.primeiraletra){
+                comp++;
                 palavra = aux->palavra;
                 aux2 = aux;
             }
@@ -229,6 +245,7 @@ void selectionSort(TListaPLe texto){
     }
     printf("\n");
     imprimeTextoLe(&texto);
+    printf("Numero de comparacoes: %lf", comp); 
 }
 
 void criaCopiaTextoLe(TListaPLe* lista, TListaPLe* listacopia){

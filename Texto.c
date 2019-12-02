@@ -15,9 +15,9 @@ void inicializaTextoArr(TListaPArr *lista, int qtdPalavras){
     lista->ultimo = 0;
 }
 void inserePalavraArr(TListaPArr *lista, int min, int max){
-    inicializaTextoArr(lista, tam);
+    int intervalo = min + rand()%(max+1-min);
+    inicializaTextoArr(lista, intervalo);
     TListaLArr palavra;
-    int intervalo = min + rand()%(max - min + 1);
     for(int i = 0; i < intervalo; i++){
         inicializaPArr(&palavra);
         insereLetraArr(&palavra);
@@ -43,22 +43,23 @@ int tamanhoTextoArr(TListaPArr *lista){
     return lista->ultimo;
 }
 
-void selectionSortArr(TListaPArr texto){
-    double comp;
+void selectionSortTextoArr(TListaPArr texto){
+    double comp = 0;
     int min, i, j;
     TListaLArr aux;
     for(i = 0; i < texto.ultimo - 1; i++){
         min = i;
         for(j = i + 1; j < texto.ultimo; j++)
-            if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra)
+            if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra) {
                 comp++;
                 min = j;
+            }
         aux = texto.palavra[i];
         texto.palavra[i] = texto.palavra[min];
         texto.palavra[min] = aux;
     }
     imprimeTextoArr(&texto);
-    printf("Numero de comparações: %lf", comp);
+    printf("\nNumero de comparações: %lf\n", comp);
 }
 
 void quicksortTextoArr(TListaPArr textoo)
@@ -121,7 +122,7 @@ void inicializaTextoLe(TListaPLe *lista){
 void inserePalavraLe(TListaPLe *lista, int min, int max){
     inicializaTextoLe(lista);
     TCelulaP *aux = NULL;
-    int intevralo = rand()%(max - min + 1);
+    int intervalo = rand()%(max - min + 1);
     for(int i = 0; i < intervalo; i++){
         aux = (TCelulaP*) malloc(sizeof(TCelulaP));
         aux->pProx = NULL;
@@ -170,10 +171,10 @@ void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double *comp, d
 }
 
 
-void quicksortTexto(TListaPLe texto){
+void quicksortTextoLe(TListaPLe texto){
     double comp, mov;
     comp = 0;
-    ordenaTexto(texto.pPrimeiro->pProx, texto.pUltimo, &texto, &comp);
+    ordenaTexto(texto.pPrimeiro->pProx, texto.pUltimo, &texto, &comp, &mov);//tava sem o &mov
     printf("\n\n comp: %lf\n", comp);
     imprimeTextoLe(&texto);
 }
@@ -218,8 +219,8 @@ void trocaTexto(TCelulaP* i, TCelulaP* j){
     j->palavra = aux;
 }
 
-void selectionSort(TListaPLe texto){
-    double comp;
+void selectionSortTextoLe(TListaPLe texto){
+    double comp = 0;
     imprimeTextoLe(&texto);
     printf("%d", texto.tam);
     TCelulaP *aux, *aux2;

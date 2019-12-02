@@ -32,7 +32,7 @@ typedef struct {
 
 //Operacoes por arranjo
 void inicializaBiblioArr(TListaTArr *lista);
-void insereTextoArr(TListaTArr *lista, int qtdPalavras, int qtdTexto, int min, int max);
+void insereTextoArr(TListaTArr *lista,  int qtdtexto, int min, int max);
 void removeTextoArr(TListaTArr *lista);
 int tamanhoBibliotecaArr(TListaTArr *lista);
 void imprimeBibliotecaArr(TListaTArr* lista);

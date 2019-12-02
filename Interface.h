@@ -8,6 +8,6 @@ void interface();
 void printFuncPalavra();
 void printFuncTexto();
 void printFuncBiblio();
-void inicializaListas(int opcED, int opcTad, int qtdPalav, TListaLLe *palaLe, TListaLArr *palaArr, TListaPLe *texLe, TListaPArr *texArr, TListaTLe *bibLe, TListaTArr *bibArr);
-void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *opcQtdPalavr, int *opcOrd);
+void inicializaListas(int opcED, int opcTad, TListaLLe *palaLe, TListaLArr *palaArr, TListaPLe *texLe, TListaPArr *texArr, TListaTLe *bibLe, TListaTArr *bibArr);
+void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *minPala, int *maxPala, int *opcOrd);
 void printComparacaoAlgOrd(clock_t tempoQuick, clock_t tempoSelect, int qtdMovQ, int qtdMovS, int qtdComQ, int qtdComS);

@@ -65,7 +65,7 @@ void printFuncBiblio(){
 
 
 }
-void inicializaListas(int opcED, int opcTad, int qtdPalav, TListaLLe *palavraLe, TListaLArr *palavraArr, TListaPLe *textoLe, TListaPArr *textoArr, TListaTLe *bibliLe, TListaTArr *bibliArr){
+void inicializaListas(int opcED, int opcTad, TListaLLe *palavraLe, TListaLArr *palavraArr, TListaPLe *textoLe, TListaPArr *textoArr, TListaTLe *bibliLe, TListaTArr *bibliArr){
     if(opcED == 1){
         if(opcTad == 1) {
             printf(GRN"----> LISTA ENCADEADA!    \n"RESET);
@@ -88,7 +88,7 @@ void inicializaListas(int opcED, int opcTad, int qtdPalav, TListaLLe *palavraLe,
             printf(GRN"\n----> ARRANJO/VETOR!    \n"RESET);
         }else
         if(opcTad == 2) {
-            inicializaTextoArr(textoArr, qtdPalav);
+            inicializaTextoArr(textoArr, 1);
             printf(GRN"\n----> ARRANJO/VETOR!    \n"RESET);
         }else
         if(opcTad == 3) {
@@ -99,7 +99,7 @@ void inicializaListas(int opcED, int opcTad, int qtdPalav, TListaLLe *palavraLe,
 
 }
 
-void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *opcQtdPalavr, int *opcOrd){
+void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *minPala, int *maxPala, int *opcOrd){
     do {
         printf(RED "-----------------------------------\n" RESET);
         printf(RED "|        " BLU"  |CONFIGURACAO|" RED             "         |\n" RESET);
@@ -179,17 +179,19 @@ void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *opcQtdPalavr, in
             printf(RED "-----------------------------------\n" RESET);
             printf(RED "|        " BLU"  |CONFIGURACAO|" RED             "         |\n" RESET);
             printf(RED "|        " BLU"  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾" RED             "         |\n" RESET);
-            printf(RED"|"RESET" Quantidade de palavras"RED   "          |\n"RESET);
+            printf(RED"|"RESET" Quantidade de palavras"RED   "           |\n"RESET);
             printf(RED "-----------------------------------\n" RESET);
-            printf(BLU "Quantidade: " RESET);
-            scanf("%d", opcQtdPalavr);
+            printf(BLU "Quantidade Minima: " RESET);
+            scanf("%d", minPala);
+            printf(BLU "Quantidade Máxima: " RESET);
+            scanf("%d", maxPala);
             system("clear");
-            if(*opcQtdPalavr < 1) {
+            if(*minPala < 1) {
                 system("clear");
                 printf(YEL"----> Insira uma quantidade válida!\n" RESET);
             }else
                 system("clear");
-        }while(*opcQtdPalavr < 1);
+        }while(*minPala < 1);
         do {
             printf(RED "-----------------------------------\n" RESET);
             printf(RED "|        " BLU"  |CONFIGURACAO|" RED             "         |\n" RESET);
@@ -226,20 +228,23 @@ void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *opcQtdPalavr, in
                 system("clear");
         }while (*opcED > 2 || *opcED < 1);
         do {
+            system("clear");
             printf(RED "-----------------------------------\n" RESET);
             printf(RED "|        " BLU"  |CONFIGURACAO|" RED             "         |\n" RESET);
             printf(RED "|        " BLU"  ‾‾‾‾‾‾‾‾‾‾‾‾‾‾" RED             "         |\n" RESET);
-            printf(RED"|"RESET"     Quantidade de palavras"RED           "      |\n"RESET);
+            printf(RED"|"RESET" Quantidade de palavras"RED   "           |\n"RESET);
             printf(RED "-----------------------------------\n" RESET);
-            printf(BLU "Quantidade: " RESET);
-            scanf("%d", opcQtdPalavr);
+            printf(BLU "Quantidade Minima: " RESET);
+            scanf("%d", minPala);
+            printf(BLU "Quantidade Máxima: " RESET);
+            scanf("%d", maxPala);
             system("clear");
-            if(*opcQtdPalavr < 1) {
+            if(*minPala < 1) {
                 system("clear");
-                printf(YEL"----> Insira uma opção válida!\n" RESET);
-            } else
+                printf(YEL"----> Insira uma quantidade válida!\n" RESET);
+            }else
                 system("clear");
-        }while(*opcQtdPalavr < 1);
+        }while(*minPala < 1);
         do {
             printf(RED "-----------------------------------\n" RESET);
             printf(RED "|        " BLU"  |CONFIGURACAO|" RED             "         |\n" RESET);
@@ -315,7 +320,7 @@ void interface(){
     int opcTad = 0; //qual tad a ser utilizado
     int opcED = 0;  //qual estrutura de dados
     int opcQtdTextos = 0; //quantidade de textos -> biblioteca
-    int opcQtdPalavr = 0; //quantidade de palavras -> texto
+    //int opcQtdPalavr = 0; //quantidade de palavras -> texto
     int opcOrd = 0;      //qual alg de orde
     int opcOperacao = 0; //operacao do tad
 
@@ -328,6 +333,7 @@ void interface(){
 
     //printComparacaoAlgOrd(tempoQuick, tempoSelect, qtdMovQ, qtdMovS, qtdComQ, qtdComS);
 
+    //TADs originais
     //-----palavra
     Tletra letra;
     TListaLLe palavraLe;
@@ -341,10 +347,19 @@ void interface(){
     TListaTLe bibliLe;
     TListaTArr bibliArr;
 
-    configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
+    //TADs Copia para ordenacao
+    //-----texto
+    TListaPArr textoCopiaArr;
+    TListaPLe textoCopiaLe;
+
+    //-----biblioteca
+    TListaTArr biblioCopiaArr;
+    TListaTLe biblioCopiaLe;
+
+    configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
 
 
-    inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+    inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
     do {
         switch (opcTad) {
             case 1: {//tad palavra
@@ -369,8 +384,8 @@ void interface(){
                         break;
                     }else if(opcOperacao == 5){ //sair
                         system("clear");
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     }else {
                         system("clear");
@@ -397,8 +412,8 @@ void interface(){
                         break;
                     } else if (opcOperacao == 5) {
                         system("clear");
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     } else {
                         system("clear");
@@ -414,7 +429,8 @@ void interface(){
                     scanf("%d", &opcOperacao);
                     if (opcOperacao == 1) {
                         system("clear");
-                        inserePalavraLe(&textoLe, opcQtdPalavr);
+                        inserePalavraLe(&textoLe, minTamPalav, maxTamPalav);
+                        criaCopiaTextoLe(&textoLe, &textoCopiaLe);
                         printf(YEL"----> Palavra inserida!\n"RESET);
                     } else if (opcOperacao == 2) {
                         system("clear");
@@ -429,12 +445,27 @@ void interface(){
                         printf("\n");
                     } else if(opcOperacao == 5) {
                         system("clear");
-                        printf(YEL"----> Texto Ordenado: "RESET);
-                        quicksortTexto(textoLe);
-                        printf("\n");
+                        if(opcOrd == 1){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortTextoLe(textoCopiaLe);
+                            printf("\n");
+                        } else
+                            if(opcOrd == 2){
+                                printf(YEL"----> Texto Ordenado: "RESET);
+                                quicksortTextoLe(textoCopiaLe);
+                                printf("\n");
+                            }else{
+                                printf(YEL"----> Texto Ordenado: "RESET);
+                                selectionSortTextoLe(textoCopiaLe);
+                                printf("\n");
+                                printf(YEL"----> Texto Ordenado: "RESET);
+                                quicksortTextoLe(textoCopiaLe);
+                                printf("\n");
+                            }
                     }else if(opcOperacao == 6) {
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        system("clear");
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     }
                 }else if(opcED == 2){ //arranjo
@@ -442,7 +473,8 @@ void interface(){
                     scanf("%d", &opcOperacao);
                     if (opcOperacao == 1) {
                         system("clear");
-                        inserePalavraArr(&textoArr, opcQtdPalavr);
+                        inserePalavraArr(&textoArr, minTamPalav, maxTamPalav);
+                        criaCopiaTextoArr(&textoArr, &textoCopiaArr);
                         printf(YEL"----> Palavra inserida!\n"RESET);
                     } else if (opcOperacao == 2) {
                         system("clear");
@@ -456,10 +488,27 @@ void interface(){
                         imprimeTextoArr(&textoArr);
                         printf("\n");
                     } else if(opcOperacao == 5){
-                        quicksortTexto(textoLe);
+                        if(opcOrd == 1){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortTextoArr(textoCopiaArr);
+                            printf("\n");
+                        } else
+                        if(opcOrd == 2){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortTextoArr(textoCopiaArr);
+                            printf("\n");
+                        }else{
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortTextoArr(textoCopiaArr);
+                            printf("\n");
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortTextoArr(textoCopiaArr);
+                            printf("\n");
+                        }
                     } else if(opcOperacao == 6){
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        system("clear");
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     }else {
                         system("clear");
@@ -475,7 +524,8 @@ void interface(){
                     scanf("%d", &opcOperacao);
                     if (opcOperacao == 1) {
                         system("clear");
-                        insereTextoLe(&bibliLe, opcQtdPalavr, opcQtdTextos);
+                        insereTextoLe(&bibliLe, opcQtdTextos, minTamPalav, maxTamPalav);
+                        criaCopiaBibLe(&bibliLe, &biblioCopiaLe);
                         printf(YEL"----> Texto inserido!\n"RESET);
                     } else if (opcOperacao == 2) {
                         system("clear");
@@ -487,11 +537,27 @@ void interface(){
                         system("clear");
                         imprimeBibliotecaLe(&bibliLe);
                     } else if(opcOperacao == 5) {
-                        system("clear");
-                        printf("Tem que ordenar!!\n");
+                        if(opcOrd == 1){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortBibLe(biblioCopiaLe);
+                            printf("\n");
+                        } else
+                        if(opcOrd == 2){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortBibLe(biblioCopiaLe);
+                            printf("\n");
+                        }else{
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortBibLe(biblioCopiaLe);
+                            printf("\n");
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortBibLe(biblioCopiaLe);
+                            printf("\n");
+                        }
                     } else if(opcOperacao == 6){
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        system("clear");
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     }
                 } else
@@ -500,7 +566,8 @@ void interface(){
                     scanf("%d", &opcOperacao);
                     if (opcOperacao == 1) {
                         system("clear");
-                        insereTextoArr(&bibliArr, opcQtdPalavr, opcQtdTextos);
+                        insereTextoArr(&bibliArr, opcQtdTextos, minTamPalav, maxTamPalav);
+                        criaCopiaBibArr(&bibliArr, &biblioCopiaArr);
                         printf(YEL"----> Texto inserido!\n"RESET);
                     } else if (opcOperacao == 2) {
                         system("clear");
@@ -513,10 +580,27 @@ void interface(){
                         imprimeBibliotecaArr(&bibliArr);
                     } else if(opcOperacao == 5) {
                         system("clear");
-                        printf("Tem que ordenar!!\n");
+                        if(opcOrd == 1){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortBibArr(biblioCopiaArr);
+                            printf("\n");
+                        } else
+                        if(opcOrd == 2){
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortBibArr(biblioCopiaArr);
+                            printf("\n");
+                        }else{
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            selectionSortBibArr(biblioCopiaArr);
+                            printf("\n");
+                            printf(YEL"----> Texto Ordenado: "RESET);
+                            quicksortBibArr(biblioCopiaArr);
+                            printf("\n");
+                        }
                     } else if(opcOperacao == 6){
-                        configura(&opcED, &opcTad, &opcQtdTextos, &opcQtdPalavr, &opcOrd);
-                        inicializaListas(opcED, opcTad, opcQtdPalavr, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
+                        system("clear");
+                        configura(&opcED, &opcTad, &opcQtdTextos, &minTamPalav, &maxTamPalav, &opcOrd);
+                        inicializaListas(opcED, opcTad, &palavraLe, &palavraArr, &textoLe, &textoArr, &bibliLe,&bibliArr);
                         break;
                     }
                 }

@@ -2,11 +2,6 @@
 // Created by lazarus on 21/11/19.
 //
 
-/*
-    TCelulaP = Tipo Celula de Palavra (celula contem uma palavra)
-    TListaPLe = Tipo Lista de Palavras por Lista Encadeada = texto por lista encadeada
-    TListaPArr = Tipo Lista de Palavras por Arranjo = texto por arranjo
- */
 
 #include "Palavra.h"
 //Lista encadeada
@@ -40,7 +35,7 @@ void selectionSortTextoArr(TListaPArr texto);
 void quicksortTextoArr(TListaPArr texto);
 void ordenaTextoArr(int Esq, int Dir, TListaPArr *A, double* comp, double* mov);
 void particaoTextoArr (int Esq, int Dir, int *i, int *j, TListaPArr *A, double* comp, double* mov);
-void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia);
+void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia);;
 
 //Operacoes por Lista encadeada
 void inicializaTextoLe(TListaPLe *lista);

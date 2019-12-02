@@ -3,18 +3,19 @@
 //
 
 #include "Biblioteca.h"
+#include <time.h>
 
 //Operacoes por arranjo
-void inicializaBiblioArr(TListaTArr *lista){
-    lista->biblioteca = (TListaPArr*) malloc(10* sizeof(TListaPArr));
+void inicializaBiblioArr(TListaTArr *lista, int qtdTextos){
+    lista->biblioteca = (TListaPArr*) malloc(qtdTextos * sizeof(TListaPArr));
     lista->primeiro = 0;
     lista->ultimo = lista->primeiro;
 }
 void insereTextoArr(TListaTArr *lista,  int qtdtexto, int min, int max){
     TListaPArr texto;
-    inicializaBiblioArr(lista);
+    inicializaBiblioArr(lista, qtdtexto);
     for(int i = 0; i < qtdtexto; i++){
-        inicializaTextoArr(&texto, qtdtexto); //cuidado pq qtdTexto n era pra estar aqui mas o intervalo
+        inicializaTextoArr(&texto, qtdtexto);
         inserePalavraArr(&texto, min, max);
         lista->biblioteca[lista->ultimo] = texto;
         lista->ultimo++;
@@ -33,17 +34,28 @@ int tamanhoBibliotecaArr(TListaTArr *lista){
 }
 
 void imprimeBibliotecaArr(TListaTArr *lista){
-    for (int i = 0; i < lista->ultimo; i++){
-        printf(YEL"----> Texto"RESET " %d!\n",i+1);
-        imprimeTextoArr(&(lista->biblioteca[i]));
-        printf("\n");
+    if(lista->ultimo <= 50){
+        for (int i = 0; i < lista->ultimo; i++) {
+            printf(YEL"----> Texto"RESET " %d!\n", i + 1);
+            imprimeTextoArr(&(lista->biblioteca[i]));
+            printf("\n");
+        }
+    } else {
+        for (int i = 0; i < 50; i++) {
+            printf(YEL"----> Texto"RESET " %d!\n", i + 1);
+            imprimeTextoArr(&(lista->biblioteca[i]));
+            printf("\n");
+        }
+        printf("[...]\n");
     }
 }
 
-void selectionSortBibArr(TListaTArr lista){
-    double comp = 0;
+void selectionSortBibArr(TListaTArr lista, int flag){
+    double comp = 0, mov = 0;
     int min, i, j;
+    clock_t tempo;
     TListaPArr aux;
+    tempo = clock();
     for(i = 0; i < lista.ultimo - 1; i++){
         min = i;
         for(j = i + 1; j < lista.ultimo; j++)
@@ -54,26 +66,51 @@ void selectionSortBibArr(TListaTArr lista){
         aux = lista.biblioteca[i];
         lista.biblioteca[i] = lista.biblioteca[min];
         lista.biblioteca[min] = aux;
+        mov++;
     }
-    imprimeBibliotecaArr(&lista);
-    printf("Numero de comparacoes: %lf", comp);
+    tempo = clock() - tempo;
+
+    if(flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeBibliotecaArr(&lista);
+    }
+    printf(YEL"\n-----------------> SelectionSort Arranjo <-----------------\n");
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf!\n",comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf!\n",mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos!\n",((double)tempo)/CLOCKS_PER_SEC);
 }
 
-void quicksortBibArr(TListaTArr lista)
+void quicksortBibArr(TListaTArr lista, int flag)
 {
     double comp = 0, mov = 0;
+    clock_t  tempo;
+
+    tempo = clock();
     ordenaBibArr(0, lista.ultimo - 1, &lista, &comp, &mov);
-    imprimeBibliotecaArr(&lista);
-    printf("Numero de comparacoes: %lf\n", comp);
-    printf("Numero de comparacoes: %lf\n", mov);
+    tempo = clock() - tempo;
+
+    if(flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeBibliotecaArr(&lista);
+    }
+    printf(YEL"\n-----------------> QuickSort Arranjo <-----------------\n");
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
 }
 
 void ordenaBibArr(int esq, int dir, TListaTArr *lista, double* comp, double* mov){
     int i, j;
     particaoBibArr(esq, dir, &i, &j, lista, comp,  mov);
 
-    if (esq < j) ordenaBibArr(esq, j, lista, comp, mov);
-    if (i < dir) ordenaBibArr(i, dir, lista, comp, mov);
+    (*comp)++;
+    if (esq < j)
+        ordenaBibArr(esq, j, lista, comp, mov);
+    (*comp)++;
+    if (i < dir)
+        ordenaBibArr(i, dir, lista, comp, mov);
 }
 
 void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista, double* comp, double* mov){
@@ -82,24 +119,40 @@ void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista, double*
     *i = esq; *j = dir;
     pivo = lista->biblioteca[(esq + dir)/2].ultimo;
     do{
-        while(pivo > lista->biblioteca[*i].ultimo){ (*i)++; (*comp)++;}
-        while(pivo < lista->biblioteca[*j].ultimo){ (*j)--; (*comp)++;}
-        if (*i <= *j){
-            (*comp)++;
-            (*mov)++;
-            aux = lista->biblioteca[*i]; lista->biblioteca[*i] = lista->biblioteca[*j]; lista->biblioteca[*j] = aux;
-            (*i)++; (*j)--;
+        (*comp)++; //verificacao antes de entrar no while
+        while(pivo > lista->biblioteca[*i].ultimo){
+            (*i)++; (*comp)++;
         }
+
+        (*comp)++; //verificacao antes de entrar no while
+        while(pivo < lista->biblioteca[*j].ultimo){
+            (*j)--; (*comp)++;
+        }
+
+        (*comp)++;
+        if (*i <= *j){
+            (*mov)++;
+            aux = lista->biblioteca[*i];
+            lista->biblioteca[*i] = lista->biblioteca[*j];
+            lista->biblioteca[*j] = aux;
+            (*i)++;
+            (*j)--;
+        }
+        (*comp)++; //comparacao do while
     }while(*i <= *j);
 }
 
-void criaCopiaBibArr(TListaTArr* lista, TListaTArr* listacopia){
-    inicializaBiblioArr(listacopia);
+void criaCopiaBibArr(TListaTArr* lista, TListaTArr* listacopia, int qtdTexto){
+    inicializaBiblioArr(listacopia, qtdTexto);
     for (int i = 0; i < lista->ultimo; i++){
         listacopia->biblioteca[i] = lista->biblioteca[i];
         listacopia->ultimo = lista->ultimo;
     }
 }
+
+
+//----------------------------------------------------------------------------------
+
 //Operacoes por lista encadeada
 void inicializaBiblioLe(TListaTLe *lista){
     lista->pPrimeiro = (TCelulaT*) malloc(sizeof(TCelulaT));
@@ -113,7 +166,6 @@ void insereTextoLe(TListaTLe *lista, int qtdtexto, int min, int max){
     TCelulaT *aux;
     inicializaBiblioLe(lista);
     for(int i = 0; i < qtdtexto; i++) {
-        //al = 1 + rand()%26;
         aux = (TCelulaT *) malloc(sizeof(TCelulaT));
         aux->pProx = NULL;
         aux->pAnte = lista->pUltimo;
@@ -142,12 +194,23 @@ void removeTextoLe(TListaTLe *lista){
 void imprimeBibliotecaLe(TListaTLe *biblioteca){
     TCelulaT* aux = biblioteca->pPrimeiro->pProx;
     int i = 1;
-    while (aux != NULL){
-        printf(" ----> Texto %d!\n", i);
-        imprimeTextoLe(&(aux->texto));
-        aux = aux->pProx;
-        i++;
-        printf("\n");
+    if(biblioteca->tam <= 50) {
+        while (aux != NULL) {
+            printf(YEL" ----> Texto "RESET"%d!\n", i);
+            imprimeTextoLe(&(aux->texto));
+            aux = aux->pProx;
+            i++;
+            printf("\n");
+        }
+    } else{
+        while (i != 50) {
+            printf(YEL" ----> Texto "RESET"%d!\n", i);
+            imprimeTextoLe(&(aux->texto));
+            aux = aux->pProx;
+            i++;
+            printf("\n");
+        }
+        printf("[...]\n");
     }
     if(biblioteca->tam == 0)
         printf(YEL"----> Não há textos! :(\n"RESET);
@@ -158,20 +221,22 @@ int tamanhoBibliotecaLe(TListaTLe *lista){
     return lista->tam;
 }
 
-void selectionSortBibLe(TListaTLe lista){
-    double comp = 0;
+void selectionSortBibLe(TListaTLe lista, int flag){
+    double comp = 0, mov = 0;
+    clock_t tempo;
     TCelulaT *aux, *aux2;
     TCelulaT* min = lista.pPrimeiro;
     TListaPLe texto, textoaux;
 
+    tempo = clock();
     for (int i = 0; i < lista.tam - 1; i++){
         min = min->pProx;
         texto = min->texto;
         aux = min->pProx;
         aux2 = min;
         for (int j = i + 1; j < lista.tam; j++){
-                if (texto.tam > aux->texto.tam){
-                comp++;
+            comp++;
+            if (texto.tam > aux->texto.tam){
                 texto = aux->texto;
                 aux2 = aux;
             }
@@ -180,27 +245,52 @@ void selectionSortBibLe(TListaTLe lista){
         textoaux = min->texto;
         min->texto = texto;
         aux2->texto = textoaux;
+        mov++;
     }
-    imprimeBibliotecaLe(&lista);
-    printf("\nNumero de comparacoes: %lf\n", comp);
+    tempo = clock() - tempo;
+
+    if(flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeBibliotecaLe(&lista);
+    }
+    printf(YEL"\n-----------------> SelectionSort Lista Encadeada <-----------------\n");
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
 }
 
 void ordenaBibLe(TCelulaT* esq, TCelulaT* dir, TListaTLe *lista, double *comp, double* mov){
     TCelulaT *i, *j;
     particaoBibLe(esq, dir, &i, &j, lista, comp, mov);
 
+    (*comp)++;
+    if(esq->indice < j->indice)
+        ordenaBibLe(esq, j, lista, comp, mov);
 
-    if(esq->indice < j->indice) ordenaBibLe(esq, j, lista, comp, mov);
-    if(dir->indice > i->indice) ordenaBibLe(i, dir, lista, comp, mov);
+    (*comp)++;
+    if(dir->indice > i->indice)
+        ordenaBibLe(i, dir, lista, comp, mov);
 }
 
 
-void quicksortBibLe(TListaTLe lista){
+void quicksortBibLe(TListaTLe lista, int flag){
     double comp = 0, mov = 0;
+    clock_t tempo;
+
+    tempo = clock();
     ordenaBibLe(lista.pPrimeiro->pProx, lista.pUltimo, &lista, &comp, &mov);
-    printf("\n\n comparacoes: %lf\n", comp);
-    printf("Numero de movimentacoes: %lf\n", mov);
-    imprimeBibliotecaLe(&lista);
+    tempo = clock() - tempo;
+
+    if(flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeBibliotecaLe(&lista);
+    }
+    printf(YEL"\n-----------------> QuickSort Lista Encadeada <-----------------\n");
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
 }
 
 void particaoBibLe(TCelulaT* esq, TCelulaT* dir, TCelulaT** ii, TCelulaT** jj, TListaTLe* lista, double *comp, double* mov){
@@ -216,20 +306,29 @@ void particaoBibLe(TCelulaT* esq, TCelulaT* dir, TCelulaT** ii, TCelulaT** jj, T
     for(int k = 1; k < ((int)(i->indice + j->indice)/2); k++)
         aux = aux->pProx;
     pivo = aux->texto.tam;
-    printf("pivo: %d ", pivo);
+//    printf("pivo: %d ", pivo);
     do{
-        while(i->texto.tam < pivo) {i = i->pProx; cont1++; (*comp)++;}
-        while (j->texto.tam > pivo){ j = j->pAnte; cont2--; (*comp)++;}
+        (*comp)++; //conta como verificacao entrando no while ou nao
+        while(i->texto.tam < pivo) {
+            i = i->pProx; cont1++;
+            (*comp)++;
+        }
+        (*comp)++; //conta como verificacao entrando no while ou nao
+        while (j->texto.tam > pivo){
+            j = j->pAnte; cont2--;
+            (*comp)++;
+        }
 
+        (*comp)++; //conta como comparacao entrando no if ou nao
         if(cont1 <= cont2){
             (*mov)++;
-            (*comp)++;
             trocaBibLe(i, j);
             i = i->pProx;
             cont1++;
             cont2--;
             j = j->pAnte;
         }
+        (*comp)++; //verificar se vai rodar de novo
     }while(cont1 <= cont2);
     *ii = i;
     *jj = j;
@@ -242,7 +341,7 @@ void trocaBibLe(TCelulaT* i, TCelulaT* j){
     j->texto = aux;
 }
 
-void criaCopiaBibLe(TListaTLe* lista, TListaTLe* listacopia){
+void criaCopiaBibLe(TListaTLe* lista, TListaTLe* listacopia, int qtdTexto){
     inicializaBiblioLe(listacopia);
     listacopia->tam = lista->tam;
     TCelulaT *aux, *aux2;

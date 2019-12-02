@@ -10,7 +10,6 @@
 //Operacoes por Arranjo
 void inicializaPArr(TListaLArr *palavra){
     palavra->letra = (Tletra*) malloc(10* sizeof(char));
-    //preencher
     palavra->primeiro = 0;
     palavra->ultimo = palavra->primeiro;
 }

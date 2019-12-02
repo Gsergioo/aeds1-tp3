@@ -21,6 +21,7 @@ void insereLetraArr(TListaLArr *lista){
         lista->letra[i].letra = 'a' + rand()%26;
         lista->ultimo++;
     }
+    lista->primeiraletra = lista->letra[0].letra;
 }
 
 void removeLetraArr(TListaLArr *lista){
@@ -57,7 +58,7 @@ void inicializaPLe(TListaLLe *lista){
 void insereLetraLe(TListaLLe *lista){
     inicializaPLe(lista);
     TCelulaL *aux;
-    int tam = rand()%45;
+    int tam = 1 + rand()%10;
     for(int i = 0; i < tam; i++){
         aux = (TCelulaL*) malloc(sizeof(TCelulaL));
         aux->pProx = NULL;

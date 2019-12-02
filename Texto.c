@@ -35,7 +35,7 @@ void removePalavraArr(TListaPArr *lista){
         printf(YEL"----> Não é possível remover!\n" RESET);
 }
 void imprimeTextoArr(TListaPArr *listaPalavra){ //muito provavel que ta errado, mas vida que segue. Depois arruma
-    for (int i = listaPalavra->primeiro; i < listaPalavra->ultimo; i++) {
+    for (int i = 0; i < listaPalavra->ultimo; i++) {
         imprimePalavraArr(&listaPalavra->palavra[i]);
     }
 }
@@ -49,15 +49,17 @@ void selectionSortTextoArr(TListaPArr texto){
     TListaLArr aux;
     for(i = 0; i < texto.ultimo - 1; i++){
         min = i;
-        for(j = i + 1; j < texto.ultimo; j++)
+        for(j = i + 1; j < texto.ultimo; j++){
+            comp++;
             if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra) {
-                comp++;
                 min = j;
             }
+        }
         aux = texto.palavra[i];
         texto.palavra[i] = texto.palavra[min];
         texto.palavra[min] = aux;
     }
+    printf("%c\n\n", texto.palavra[0].primeiraletra);
     imprimeTextoArr(&texto);
     printf("\nNumero de comparações: %lf\n", comp);
 }
@@ -69,7 +71,7 @@ void quicksortTextoArr(TListaPArr textoo)
     imprimeTextoArr(&textoo);
     printf("\nNumero de comparacoes: %lf\n", comp);
     printf("Numero de movimentações: %lf\n", mov);
-    
+
 }
 
 void ordenaTextoArr(int esq, int dir, TListaPArr *texto, double* comp, double* mov){
@@ -100,7 +102,7 @@ void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto, doubl
 }
 
 void criaCopiaTextoArr(TListaPArr* lista, TListaPArr* listacopia){
-    inicializaTextoArr(listacopia, 10);
+    inicializaTextoArr(listacopia, lista->ultimo);
     for (int i = 0; i < lista->ultimo; i++){
         listacopia->palavra[i] = lista->palavra[i];
         listacopia->ultimo = lista->ultimo;
@@ -122,7 +124,7 @@ void inicializaTextoLe(TListaPLe *lista){
 void inserePalavraLe(TListaPLe *lista, int min, int max){
     inicializaTextoLe(lista);
     TCelulaP *aux = NULL;
-    int intervalo = rand()%(max - min + 1);
+    int intervalo = min + rand()%(max - min + 1);
     for(int i = 0; i < intervalo; i++){
         aux = (TCelulaP*) malloc(sizeof(TCelulaP));
         aux->pProx = NULL;
@@ -175,8 +177,9 @@ void quicksortTextoLe(TListaPLe texto){
     double comp, mov;
     comp = 0;
     ordenaTexto(texto.pPrimeiro->pProx, texto.pUltimo, &texto, &comp, &mov);//tava sem o &mov
-    printf("\n\n comp: %lf\n", comp);
     imprimeTextoLe(&texto);
+    printf("comp: %lf\n", comp);
+    printf("Mov: %lf\n", mov);
 }
 
 void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double *comp, double* mov){
@@ -192,7 +195,6 @@ void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, T
     for(int k = 1; k < ((int)(i->indice + j->indice)/2); k++)
         aux = aux->pProx;
     pivo = aux->palavra.primeiraletra;
-    printf("pivo: %c ", pivo);
     do{
         while(i->palavra.primeiraletra < pivo) {i = i->pProx; cont1++; (*comp)++;}
         while (j->palavra.primeiraletra > pivo){ j = j->pAnte; cont2--; (*comp)++;}
@@ -221,8 +223,6 @@ void trocaTexto(TCelulaP* i, TCelulaP* j){
 
 void selectionSortTextoLe(TListaPLe texto){
     double comp = 0;
-    imprimeTextoLe(&texto);
-    printf("%d", texto.tam);
     TCelulaP *aux, *aux2;
     TCelulaP* min = texto.pPrimeiro;
 
@@ -246,7 +246,7 @@ void selectionSortTextoLe(TListaPLe texto){
     }
     printf("\n");
     imprimeTextoLe(&texto);
-    printf("Numero de comparacoes: %lf", comp); 
+    printf("Numero de comparacoes: %lf", comp);
 }
 
 void criaCopiaTextoLe(TListaPLe* lista, TListaPLe* listacopia){

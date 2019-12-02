@@ -56,13 +56,14 @@ void selectionSortBibArr(TListaTArr lista, int flag){
     clock_t tempo;
     TListaPArr aux;
     tempo = clock();
-    for(i = 0; i < lista.ultimo - 1; i++){
+    for (i = 0; i < lista.ultimo - 1; i++) {
         min = i;
-        for(j = i + 1; j < lista.ultimo; j++)
-            if (lista.biblioteca[min].ultimo > lista.biblioteca[j].ultimo){
+        for (j = i + 1; j < lista.ultimo; j++) {
+            comp++;
+            if (lista.biblioteca[min].ultimo > lista.biblioteca[j].ultimo) {
                 min = j;
-                comp++;
             }
+        }
         aux = lista.biblioteca[i];
         lista.biblioteca[i] = lista.biblioteca[min];
         lista.biblioteca[min] = aux;
@@ -70,35 +71,35 @@ void selectionSortBibArr(TListaTArr lista, int flag){
     }
     tempo = clock() - tempo;
 
-    if(flag) {
+    if (flag) {
         system("clear");
         printf(YEL"----> Texto Ordenado: "RESET);
         imprimeBibliotecaArr(&lista);
     }
     printf(YEL"\n-----------------> SelectionSort Arranjo <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf!\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf!\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos!\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void quicksortBibArr(TListaTArr lista, int flag)
 {
     double comp = 0, mov = 0;
-    clock_t  tempo;
+    clock_t tempo;
 
     tempo = clock();
     ordenaBibArr(0, lista.ultimo - 1, &lista, &comp, &mov);
     tempo = clock() - tempo;
 
-    if(flag) {
+    if (flag) {
         system("clear");
         printf(YEL"----> Texto Ordenado: "RESET);
         imprimeBibliotecaArr(&lista);
     }
     printf(YEL"\n-----------------> QuickSort Arranjo <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void ordenaBibArr(int esq, int dir, TListaTArr *lista, double* comp, double* mov){
@@ -114,7 +115,7 @@ void ordenaBibArr(int esq, int dir, TListaTArr *lista, double* comp, double* mov
 }
 
 void particaoBibArr(int esq, int dir, int* i, int* j, TListaTArr* lista, double* comp, double* mov){
-    char pivo;
+    int pivo;
     TListaPArr aux;
     *i = esq; *j = dir;
     pivo = lista->biblioteca[(esq + dir)/2].ultimo;
@@ -225,18 +226,18 @@ void selectionSortBibLe(TListaTLe lista, int flag){
     double comp = 0, mov = 0;
     clock_t tempo;
     TCelulaT *aux, *aux2;
-    TCelulaT* min = lista.pPrimeiro;
+    TCelulaT *min = lista.pPrimeiro;
     TListaPLe texto, textoaux;
 
     tempo = clock();
-    for (int i = 0; i < lista.tam - 1; i++){
+    for (int i = 0; i < lista.tam - 1; i++) {
         min = min->pProx;
         texto = min->texto;
         aux = min->pProx;
         aux2 = min;
-        for (int j = i + 1; j < lista.tam; j++){
+        for (int j = i + 1; j < lista.tam; j++) {
             comp++;
-            if (texto.tam > aux->texto.tam){
+            if (texto.tam > aux->texto.tam) {
                 texto = aux->texto;
                 aux2 = aux;
             }
@@ -249,15 +250,15 @@ void selectionSortBibLe(TListaTLe lista, int flag){
     }
     tempo = clock() - tempo;
 
-    if(flag) {
+    if (flag) {
         system("clear");
         printf(YEL"----> Texto Ordenado: "RESET);
         imprimeBibliotecaLe(&lista);
     }
     printf(YEL"\n-----------------> SelectionSort Lista Encadeada <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void ordenaBibLe(TCelulaT* esq, TCelulaT* dir, TListaTLe *lista, double *comp, double* mov){
@@ -282,15 +283,15 @@ void quicksortBibLe(TListaTLe lista, int flag){
     ordenaBibLe(lista.pPrimeiro->pProx, lista.pUltimo, &lista, &comp, &mov);
     tempo = clock() - tempo;
 
-    if(flag) {
+    if (flag) {
         system("clear");
         printf(YEL"----> Texto Ordenado: "RESET);
         imprimeBibliotecaLe(&lista);
     }
     printf(YEL"\n-----------------> QuickSort Lista Encadeada <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void particaoBibLe(TCelulaT* esq, TCelulaT* dir, TCelulaT** ii, TCelulaT** jj, TListaTLe* lista, double *comp, double* mov){

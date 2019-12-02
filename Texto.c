@@ -50,56 +50,58 @@ int tamanhoTextoArr(TListaPArr *lista){
     return lista->ultimo;
 }
 
-void selectionSortTextoArr(TListaPArr texto){
-    if(texto.ultimo != 0) {
-        double comp = 0, mov = 0;
-        int min, i, j;
-        clock_t tempo;
-        TListaLArr aux;
+void selectionSortTextoArr(TListaPArr texto, int flag){
+    double comp = 0, mov = 0;
+    int min, i, j;
+    clock_t tempo;
+    TListaLArr aux;
 
-        tempo = clock();
-        for (i = 0; i < texto.ultimo - 1; i++) {
-            min = i;
-            for (j = i + 1; j < texto.ultimo; j++) {
-                comp++;
-                if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra) {
-                    min = j;
-                }
+    tempo = clock();
+    for (i = 0; i < texto.ultimo - 1; i++) {
+        min = i;
+        for (j = i + 1; j < texto.ultimo; j++) {
+            comp++;
+            if (texto.palavra[min].primeiraletra > texto.palavra[j].primeiraletra) {
+                min = j;
             }
-            aux = texto.palavra[i];
-            texto.palavra[i] = texto.palavra[min];
-            texto.palavra[min] = aux;
-            mov++;
         }
-        tempo = clock() - tempo;
+        aux = texto.palavra[i];
+        texto.palavra[i] = texto.palavra[min];
+        texto.palavra[min] = aux;
+        mov++;
+    }
+    tempo = clock() - tempo;
 
+    if(flag) {
         system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
         imprimeTextoArr(&texto);
-        printf("\n");
-        printf(YEL"\n-----------------> SelectionSort Arranjo <-----------------\n");
-        printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
-        printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
-        printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
-    }else
-        printf(YEL"----> Nada a ordenar!\n"RESET);
+    }
+    printf("\n");
+    printf(YEL"\n-----------------> SelectionSort Arranjo <-----------------\n");
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
-void quicksortTextoArr(TListaPArr textoo)
+void quicksortTextoArr(TListaPArr textoo, int flag)
 {
-    double comp, mov;
+    double comp = 0, mov = 0;
     clock_t tempo;
 
     tempo = clock();
     ordenaTextoArr(0, textoo.ultimo - 1, &textoo, &comp, &mov);
     tempo = clock() - tempo;
 
-    system("clear");
-    imprimeTextoArr(&textoo);
+    if (flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeTextoArr(&textoo);
+    }
     printf(YEL"\n-----------------> QuickSort Arranjo <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
-
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void ordenaTextoArr(int esq, int dir, TListaPArr *texto, double* comp, double* mov){
@@ -115,7 +117,7 @@ void ordenaTextoArr(int esq, int dir, TListaPArr *texto, double* comp, double* m
 }
 
 void particaoTextoArr(int esq, int dir, int* i, int* j, TListaPArr* texto, double* comp, double* mov){
-    char pivo;
+    int pivo; //tava char
     TListaLArr aux;
     *i = esq; *j = dir;
     pivo = texto->palavra[(esq + dir)/2].primeiraletra;
@@ -229,7 +231,7 @@ void ordenaTexto(TCelulaP* esq, TCelulaP* dir, TListaPLe *texto, double *comp, d
 }
 
 
-void quicksortTextoLe(TListaPLe texto){
+void quicksortTextoLe(TListaPLe texto, int flag){
     double comp = 0, mov = 0;
     clock_t tempo;
 
@@ -237,12 +239,15 @@ void quicksortTextoLe(TListaPLe texto){
     ordenaTexto(texto.pPrimeiro->pProx, texto.pUltimo, &texto, &comp, &mov);//tava sem o &mov
     tempo = clock() - tempo;
 
-    system("clear");
-    imprimeTextoLe(&texto);
+    if (flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeTextoLe(&texto);
+    }
     printf(YEL"\n-----------------> QuickSort Lista Encadeada <-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, TListaPLe* texto, double *comp, double* mov){
@@ -279,8 +284,8 @@ void particaoTexto(TCelulaP* esq, TCelulaP* dir, TCelulaP** ii, TCelulaP** jj, T
             cont2--;
             j = j->pAnte;
         }
+        (*comp)++;
     }while(cont1 <= cont2);
-    *comp = *comp * 2;
     *ii = i;
     *jj = j;
 }
@@ -292,23 +297,23 @@ void trocaTexto(TCelulaP* i, TCelulaP* j){
     j->palavra = aux;
 }
 
-void selectionSortTextoLe(TListaPLe texto){
+void selectionSortTextoLe(TListaPLe texto, int flag){
     double comp = 0, mov = 0;
     clock_t tempo;
     TCelulaP *aux, *aux2;
-    TCelulaP* min = texto.pPrimeiro;
+    TCelulaP *min = texto.pPrimeiro;
 
     TListaLLe palavra, palavraaux;
 
     tempo = clock();
-    for (int i = 0; i < texto.tam - 1; i++){
+    for (int i = 0; i < texto.tam - 1; i++) {
         min = min->pProx;
         palavra = min->palavra;
         aux = min->pProx;
         aux2 = min;
-        for (int j = i + 1; j < texto.tam; j++){
+        for (int j = i + 1; j < texto.tam; j++) {
             comp++;
-            if (palavra.primeiraletra > aux->palavra.primeiraletra){
+            if (palavra.primeiraletra > aux->palavra.primeiraletra) {
                 palavra = aux->palavra;
                 aux2 = aux;
             }
@@ -321,12 +326,15 @@ void selectionSortTextoLe(TListaPLe texto){
     }
     tempo = clock() - tempo;
 
-    system("clear");
-    imprimeTextoLe(&texto);
+    if (flag) {
+        system("clear");
+        printf(YEL"----> Texto Ordenado: "RESET);
+        imprimeTextoLe(&texto);
+    }
     printf(YEL"\n-----------------> SelectionSort Lista Encadeada<-----------------\n");
-    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n",comp);
-    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n",mov);
-    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n",((double)tempo)/CLOCKS_PER_SEC);
+    printf(YEL"----> Numero de comparacoes: "RESET"%.0lf\n", comp);
+    printf(YEL"----> Numero de movimentacoes: "RESET"%.0lf\n", mov);
+    printf(YEL"----> Tempo de execucao: "RESET"%lf segundos\n", ((double) tempo) / CLOCKS_PER_SEC);
 }
 
 void criaCopiaTextoLe(TListaPLe* lista, TListaPLe* listacopia){

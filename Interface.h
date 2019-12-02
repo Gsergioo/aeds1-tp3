@@ -8,5 +8,5 @@ void interface();
 void printFuncPalavra();
 void printFuncTexto();
 void printFuncBiblio();
-void inicializaListas(int opcED, int opcTad, TListaLLe *palaLe, TListaLArr *palaArr, TListaPLe *texLe, TListaPArr *texArr, TListaTLe *bibLe, TListaTArr *bibArr);
+int inicializaListas(int opcED, int opcTad, TListaLLe *palavraLe, TListaLArr *palavraArr, TListaPLe *textoLe, TListaPArr *textoArr, TListaTLe *bibliLe, TListaTArr *bibliArr, TListaPLe *textoCopiaLe, TListaPArr *textoCopiaArr, TListaTLe *bibCopiaLe, TListaTArr *bibCopiaArr);
 void configura(int *opcED, int *opcTad, int *opcQtdTextos, int *minPala, int *maxPala, int *opcOrd);

@@ -34,6 +34,7 @@ void printFuncPalavra(){
 
 
 void printFuncTexto(){
+    printf(GRN"\n           TAD Texto!           \n"RESET);
     printf(RED "-----------------------------------\n" RESET);
     printf(RED "|        " BLU"     |OPERAÇÕES|" RED             "         |\n" RESET);
     printf(RED "|        " BLU"     ‾‾‾‾‾‾‾‾‾‾‾" RED             "         |\n" RESET);
@@ -51,6 +52,7 @@ void printFuncTexto(){
 
 
 void printFuncBiblio(){
+    printf(GRN"\n           TAD Biblioteca!           \n"RESET);
     printf(RED "-----------------------------------\n"                          RESET);
     printf(RED "|        " BLU"     |OPERAÇÕES|" RED             "         |\n" RESET);
     printf(RED "|        " BLU"     ‾‾‾‾‾‾‾‾‾‾‾" RED             "         |\n" RESET);
